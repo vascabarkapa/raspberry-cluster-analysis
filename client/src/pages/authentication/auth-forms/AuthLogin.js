@@ -47,7 +47,7 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                  <InputLabel htmlFor="email-login">Email</InputLabel>
                   <OutlinedInput
                     id="email-login"
                     type="email"
@@ -55,7 +55,7 @@ const AuthLogin = () => {
                     name="email"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter email address"
+                    placeholder="Enter email"
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
                   />
