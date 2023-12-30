@@ -20,14 +20,16 @@ const pages = {
       title: 'Cluster',
       type: 'item',
       url: '/cluster',
-      icon: icons.ApartmentOutlined
+      icon: icons.ApartmentOutlined,
+      breadcrumbs: false
     },
     {
       id: 'pictures',
       title: 'Pictures',
       type: 'item',
       url: '/pictures',
-      icon: icons.PictureOutlined
+      icon: icons.PictureOutlined,
+      breadcrumbs: false
     }
   ]
 };

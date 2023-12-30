@@ -18,7 +18,8 @@ const support = {
       title: 'Users',
       type: 'item',
       url: '/users',
-      icon: icons.UserOutlined
+      icon: icons.UserOutlined,
+      breadcrumbs: false
     },
     {
       id: 'api-documentation',
