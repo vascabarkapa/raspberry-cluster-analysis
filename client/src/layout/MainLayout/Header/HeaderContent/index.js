@@ -24,7 +24,7 @@ const HeaderContent = () => {
         target="_blank"
         disableRipple
         color="secondary"
-        title="Download Free Version"
+        title="See Source Code"
         sx={{ color: 'text.primary', bgcolor: 'grey.100' }}
       >
         <GithubOutlined />
