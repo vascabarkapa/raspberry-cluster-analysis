@@ -1,13 +1,12 @@
-// assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import { UserOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-  ChromeOutlined,
-  QuestionOutlined
+  UserOutlined,
+  QuestionCircleOutlined
 };
 
-// ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
+// ==============================|| MENU ITEMS - SUPPORT ||============================== //
 
 const support = {
   id: 'support',
@@ -15,18 +14,18 @@ const support = {
   type: 'group',
   children: [
     {
-      id: 'sample-page',
-      title: 'Sample Page',
+      id: 'users',
+      title: 'Users',
       type: 'item',
-      url: '/sample-page',
-      icon: icons.ChromeOutlined
+      url: '/users',
+      icon: icons.UserOutlined
     },
     {
-      id: 'documentation',
-      title: 'Documentation',
+      id: 'api-documentation',
+      title: 'API Documentation',
       type: 'item',
       url: 'https://github.com/vascabarkapa/raspberry-cluster-analysis/',
-      icon: icons.QuestionOutlined,
+      icon: icons.QuestionCircleOutlined,
       external: true,
       target: true
     }
