@@ -32,7 +32,7 @@ const MainRoutes = {
           element: <DashboardDefault />
         }
       ]
-    },
+    }
   ]
 };
 
