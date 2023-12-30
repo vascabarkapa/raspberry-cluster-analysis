@@ -29,6 +29,7 @@ const Header = ({ open, handleDrawerToggle }) => {
         onClick={handleDrawerToggle}
         edge="start"
         color="secondary"
+        title={!open ? 'Open Navigation Menu' : 'Hide Navigation Menu'}
         sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : iconBackColor, ml: { xs: 0, lg: -2 } }}
       >
         {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
