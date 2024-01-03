@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { Navigate } from 'react-router';
 
 // project import
 import Loadable from 'components/Loadable';
@@ -10,9 +11,13 @@ const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
+const isAuthenticated = () => {
+  return localStorage.getItem('token') !== null;
+};
+
 const LoginRoutes = {
   path: '/',
-  element: <MinimalLayout />,
+  element: isAuthenticated() ? <Navigate to={'/'} /> : <MinimalLayout />,
   children: [
     {
       path: 'login',

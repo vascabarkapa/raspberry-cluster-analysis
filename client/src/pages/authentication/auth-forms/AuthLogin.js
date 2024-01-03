@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -7,7 +6,6 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const AuthLogin = () => {
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => {
@@ -34,7 +32,8 @@ const AuthLogin = () => {
           try {
             setStatus({ success: false });
             setSubmitting(false);
-            navigate('/');
+            localStorage.setItem('token', 'testToken');
+            window.location.href = '/';
           } catch (err) {
             setStatus({ success: false });
             setErrors({ submit: err.message });

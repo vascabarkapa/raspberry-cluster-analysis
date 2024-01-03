@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { Navigate } from 'react-router';
 
 // project import
 import Loadable from 'components/Loadable';
@@ -12,9 +13,13 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
+const isAuthenticated = () => {
+  return localStorage.getItem('token') !== null;
+};
+
 const MainRoutes = {
   path: '/',
-  element: <MainLayout />,
+  element: isAuthenticated() ? <MainLayout /> : <Navigate to={'/login'} />,
   children: [
     {
       path: '',
