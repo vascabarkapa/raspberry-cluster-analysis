@@ -5,7 +5,7 @@ import { Grid, Typography } from '@mui/material';
 import MainCard from 'components/MainCard';
 import ClusterTable from './ClusterTable';
 
-// ==============================|| PICTURES PAGE ||============================== //
+// ==============================|| CLUSTER PAGE ||============================== //
 
 const ClusterPage = () => (
   <Grid item xs={12} sx={{ mx: 5, my: 2 }}>
