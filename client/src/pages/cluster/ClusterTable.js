@@ -40,7 +40,7 @@ const rows = Array.from({ length: 20 }, (_, index) => {
   return createData(trackingNo, clusterLoad, numberOfPods, numberOfNodes, createdAt);
 });
 
-// ==============================|| ORDER TABLE - HEADER CELL ||============================== //
+// ==============================|| CLUSTER TABLE - HEADER CELL ||============================== //
 
 const headCells = [
   {
@@ -75,9 +75,9 @@ const headCells = [
   }
 ];
 
-// ==============================|| ORDER TABLE - HEADER ||============================== //
+// ==============================|| CLUSTER TABLE - HEADER ||============================== //
 
-function OrderTableHead() {
+function ClusterTableHead() {
   return (
     <TableHead>
       <TableRow>
@@ -91,14 +91,9 @@ function OrderTableHead() {
   );
 }
 
-OrderTableHead.propTypes = {
-  order: PropTypes.string,
-  orderBy: PropTypes.string
-};
+// ==============================|| CLUSTER TABLE - STATUS ||============================== //
 
-// ==============================|| ORDER TABLE - STATUS ||============================== //
-
-const OrderStatus = ({ status }) => {
+const ClusterStatus = ({ status }) => {
   let color;
 
   if (status >= 0 && status < 40) {
@@ -119,13 +114,13 @@ const OrderStatus = ({ status }) => {
   );
 };
 
-OrderStatus.propTypes = {
+ClusterStatus.propTypes = {
   status: PropTypes.number
 };
 
-// ==============================|| ORDER TABLE ||============================== //
+// ==============================|| CLUSTER TABLE ||============================== //
 
-export default function OrderTable() {
+export default function ClusterTable() {
   return (
     <Box>
       <TableContainer
@@ -149,7 +144,7 @@ export default function OrderTable() {
             }
           }}
         >
-          <OrderTableHead />
+          <ClusterTableHead />
           <TableBody>
             {rows.map((row) => {
               return (
@@ -164,7 +159,7 @@ export default function OrderTable() {
                     {row.trackingNo}
                   </TableCell>
                   <TableCell align="left">
-                    <OrderStatus status={row.clusterLoad} />
+                    <ClusterStatus status={row.clusterLoad} />
                   </TableCell>
                   <TableCell align="left">{row.numberOfPods}</TableCell>
                   <TableCell align="left">{row.numberOfNodes}</TableCell>
