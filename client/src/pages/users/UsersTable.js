@@ -1,5 +1,8 @@
 // material-ui
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
+
+// assets
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 function createData(fullName, username, email, role) {
   return { fullName, username, email, role };
@@ -98,7 +101,18 @@ export default function UsersTable() {
                   <TableCell align="left">{row.username}</TableCell>
                   <TableCell align="left">{row.email}</TableCell>
                   <TableCell align="left">{row.role}</TableCell>
-                  <TableCell align="left"></TableCell>
+                  <TableCell align="right">
+                    <Tooltip title="Edit User">
+                      <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+                        <EditOutlined />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip title="Delete User">
+                      <Button variant="contained" color="error">
+                        <DeleteOutlined />
+                      </Button>
+                    </Tooltip>
+                  </TableCell>
                 </TableRow>
               );
             })}
