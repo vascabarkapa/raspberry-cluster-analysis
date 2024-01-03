@@ -9,7 +9,7 @@ const rows = [
   createData('Vladimir Vujović', 'vladimir.vujovic', 'vladimir@cloudberry.com', 'Admin'),
   createData('Marko Malović', 'marko.malovic', 'marko@cloudberry.com', 'Admin'),
   createData('Milica Vuković', 'milica.vukovic', 'milica@cloudberry.com', 'Admin'),
-  createData('Vasilije Čabarkapa', 'vasilije.cabarkapa', 'vasilije@cloudberry.com', 'Admin'),
+  createData('Vasilije Čabarkapa', 'vasilije.cabarkapa', 'vasilije@cloudberry.com', 'Admin')
 ];
 
 // ==============================|| USERS TABLE - HEADER CELL ||============================== //
@@ -93,13 +93,7 @@ export default function UsersTable() {
           <TableBody>
             {rows.map((row) => {
               return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  tabIndex={-1}
-                  key={row.username}
-                >
+                <TableRow hover role="checkbox" sx={{ '&:last-child td, &:last-child th': { border: 0 } }} tabIndex={-1} key={row.username}>
                   <TableCell align="left">{row.fullName}</TableCell>
                   <TableCell align="left">{row.username}</TableCell>
                   <TableCell align="left">{row.email}</TableCell>
