@@ -1,8 +1,14 @@
+import { useState } from 'react';
+
 // material-ui
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 
 // assets
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+
+// components
+import UsersFormModal from './UsersFormModal';
+import UsersDeleteModal from './UsersDeleteModal';
 
 function createData(fullName, username, email, role) {
   return { fullName, username, email, role };
@@ -69,6 +75,17 @@ function UsersTableHead() {
 // ==============================|| USERS TABLE ||============================== //
 
 export default function UsersTable() {
+  const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
+  const [openUsersDeleteModal, setOpenDeleteFormModal] = useState(false);
+
+  const handleOpenUsersFormModal = () => {
+    setOpenUsersFormModal(true);
+  };
+
+  const handleOpenUsersDeleteModal = () => {
+    setOpenDeleteFormModal(true);
+  };
+
   return (
     <Box>
       <TableContainer
@@ -103,12 +120,12 @@ export default function UsersTable() {
                   <TableCell align="left">{row.role}</TableCell>
                   <TableCell align="right">
                     <Tooltip title="Edit User">
-                      <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+                      <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={handleOpenUsersFormModal}>
                         <EditOutlined />
                       </Button>
                     </Tooltip>
                     <Tooltip title="Delete User">
-                      <Button variant="contained" color="error">
+                      <Button variant="contained" color="error" onClick={handleOpenUsersDeleteModal}>
                         <DeleteOutlined />
                       </Button>
                     </Tooltip>
@@ -119,6 +136,8 @@ export default function UsersTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      {openUsersFormModal && <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} />}
+      {openUsersDeleteModal && <UsersDeleteModal open={openUsersDeleteModal} setOpen={setOpenDeleteFormModal} />}
     </Box>
   );
 }
