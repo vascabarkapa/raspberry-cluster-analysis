@@ -152,7 +152,7 @@ export default function PicturesTable() {
                     {row.trackingNo}
                   </TableCell>
                   <TableCell align="left">{row.nodeName}</TableCell>
-                  <TableCell align="left">{row.pictureName}</TableCell>
+                  <TableCell align="left">{row.pictureName}.jpg</TableCell>
                   <TableCell align="left">{row.numberOfFaces}</TableCell>
                   <TableCell align="left">{row.processingTime}s</TableCell>
                   <TableCell align="left">{row.createdAt}</TableCell>
