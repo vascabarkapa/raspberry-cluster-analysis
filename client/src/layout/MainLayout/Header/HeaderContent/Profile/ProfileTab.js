@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import UsersFormModal from '../../../../../pages/users/UsersFormModal';
+import UsersDetailsModal from '../../../../../pages/users/UsersDetailsModal';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -12,27 +14,26 @@ import { EditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
+  const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
+  const [openUsersDetailsModal, setOpenDetailsFormModal] = useState(false);
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+      <ListItemButton onClick={() => setOpenUsersFormModal(true)}>
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
         <ListItemText primary="Edit Profile" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
+      {openUsersFormModal && <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} />}
+      <ListItemButton onClick={() => setOpenDetailsFormModal(true)}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="View Profile" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
+      {openUsersDetailsModal && <UsersDetailsModal open={openUsersDetailsModal} setOpen={setOpenDetailsFormModal} />}
+      <ListItemButton onClick={handleLogout}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
