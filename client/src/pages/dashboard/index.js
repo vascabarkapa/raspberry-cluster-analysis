@@ -19,7 +19,7 @@ const DashboardDefault = () => {
   }, []);
 
   return (
-    <Grid item xs={12} sx={{ mx: 5, my: 2 }}>
+    <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
         {/* row 1 */}
         <Grid item xs={12} md={7} lg={8}>

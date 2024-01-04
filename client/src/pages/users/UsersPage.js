@@ -29,7 +29,7 @@ const UsersPage = () => {
 
   return (
     <>
-      <Grid item xs={12} sx={{ mx: 5, my: 2 }}>
+      <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
