@@ -25,10 +25,9 @@ const support = {
       id: 'api-documentation',
       title: 'API Documentation',
       type: 'item',
-      url: 'https://github.com/vascabarkapa/raspberry-cluster-analysis/',
+      url: '/api-documentation',
       icon: icons.QuestionCircleOutlined,
-      external: true,
-      target: true
+      breadcrumbs: false
     }
   ]
 };

@@ -7,6 +7,7 @@ import MainLayout from 'layout/MainLayout';
 import UsersPage from '../pages/users/UsersPage';
 import PicturesPage from '../pages/pictures/PicturesPage';
 import ClusterPage from '../pages/cluster/ClusterPage';
+import ApiDocumentationPage from '../pages/api-documentation/ApiDocumentationPage';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -36,6 +37,10 @@ const MainRoutes = {
     {
       path: 'users',
       element: <UsersPage />
+    },
+    {
+      path: 'api-documentation',
+      element: <ApiDocumentationPage />
     }
   ]
 };
