@@ -1,17 +1,14 @@
 // material-ui
-import { Box, IconButton, Link, useMediaQuery } from '@mui/material';
+import { Box, IconButton, Link } from '@mui/material';
 import { GithubOutlined } from '@ant-design/icons';
 
 // project import
 import Profile from './Profile';
 import Notification from './Notification';
-import MobileSection from './MobileSection';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
-  const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
-
   return (
     <>
       <Box sx={{ width: '100%', ml: 1 }} />
@@ -29,8 +26,7 @@ const HeaderContent = () => {
       </IconButton>
 
       <Notification />
-      {!matchesXs && <Profile />}
-      {matchesXs && <MobileSection />}
+      <Profile />
     </>
   );
 };

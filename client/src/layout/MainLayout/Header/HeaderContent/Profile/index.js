@@ -16,7 +16,8 @@ import {
   Stack,
   Tab,
   Tabs,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material';
 
 // project import
@@ -54,6 +55,7 @@ function a11yProps(index) {
 
 const Profile = () => {
   const theme = useTheme();
+  const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const handleLogout = async () => {
     localStorage.removeItem('token');
@@ -97,8 +99,8 @@ const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar2} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">Cloudberry Admin</Typography>
+          <Avatar sx={{ width: 32, height: 32 }}>CA</Avatar>
+          {!matchesXs && <Typography variant="subtitle1">Cloudberry Admin</Typography>}
         </Stack>
       </ButtonBase>
       <Popper
