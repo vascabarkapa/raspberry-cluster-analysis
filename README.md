@@ -7,6 +7,7 @@ Clone from GitHub
 
 ```
 git clone git@github.com:vascabarkapa/raspberry-cluster-analysis.git
+cd client
 yarn
 yarn start
 ```
