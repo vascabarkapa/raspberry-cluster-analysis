@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -8,7 +9,6 @@ import DialogContent from '@mui/material/DialogContent';
 
 import { Typography } from '@mui/material';
 
-// eslint-disable-next-line
 const UsersDetailsModal = ({ open, setOpen }) => {
   const handleClose = () => {
     setOpen(false);
@@ -45,6 +45,11 @@ const UsersDetailsModal = ({ open, setOpen }) => {
       </DialogContent>
     </Dialog>
   );
+};
+
+UsersDetailsModal.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func
 };
 
 export default UsersDetailsModal;
