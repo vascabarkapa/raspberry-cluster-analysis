@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const {ConnectOptions} = require("mongoose");
 
 const dbOptions = {
   dbName: 'cloudberry_local'
