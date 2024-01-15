@@ -10,4 +10,4 @@ const Constants = {
   responseStatusCodes
 }
 
-export default Constants;
+module.exports = Constants;
