@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "raspberry-cluser-analysis-backend",
   "version": "1.0.0",
   "description": "This is Express project for Cloudberry backend API",
