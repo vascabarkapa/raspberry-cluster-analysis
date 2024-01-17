@@ -1,7 +1,10 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbOptions = {
-  dbName: 'cloudberry_local'
+  dbName: process.env.ENVIRONMENT
 }
 
 export default async () => {
