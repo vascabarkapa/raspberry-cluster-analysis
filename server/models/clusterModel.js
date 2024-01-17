@@ -19,5 +19,5 @@ const clusterSchema = new Schema({
   }
 );
 
-const Cluster = model('Cluster', clusterSchema)
-export default Cluster
+const Cluster = model('Cluster', clusterSchema);
+export default Cluster;
