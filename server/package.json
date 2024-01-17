@@ -1,8 +1,8 @@
 {
-  "type": "module",
   "name": "raspberry-cluser-analysis-backend",
   "version": "1.0.0",
   "description": "This is Express project for Cloudberry backend API",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
