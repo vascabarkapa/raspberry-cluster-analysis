@@ -4,28 +4,28 @@ import { updatePageTitle } from '../../utils/TitleUtils';
 
 // project import
 import MainCard from 'components/MainCard';
-import PicturesTable from './PicturesTable';
+import ImageTable from './ImageTable';
 import { useEffect } from 'react';
 
-// ==============================|| PICTURES PAGE ||============================== //
+// ==============================|| IMAGE PAGE ||============================== //
 
-const PicturesPage = () => {
+const ImagePage = () => {
   useEffect(() => {
-    updatePageTitle('Pictures - Cloudberry');
+    updatePageTitle('Image - Cloudberry');
   }, []);
 
   return (
     <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Typography variant="h3">Pictures Information</Typography>
+          <Typography variant="h3">Image Information</Typography>
         </Grid>
       </Grid>
       <MainCard sx={{ mt: 2 }} content={false}>
-        <PicturesTable />
+        <ImageTable />
       </MainCard>
     </Grid>
   );
 };
 
-export default PicturesPage;
+export default ImagePage;

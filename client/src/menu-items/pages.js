@@ -24,10 +24,10 @@ const pages = {
       breadcrumbs: false
     },
     {
-      id: 'pictures',
-      title: 'Pictures',
+      id: 'image',
+      title: 'Image',
       type: 'item',
-      url: '/pictures',
+      url: '/image',
       icon: icons.PictureOutlined,
       breadcrumbs: false
     }

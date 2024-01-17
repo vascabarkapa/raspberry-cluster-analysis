@@ -5,7 +5,7 @@ import { Navigate } from 'react-router';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import UsersPage from '../pages/users/UsersPage';
-import PicturesPage from '../pages/pictures/PicturesPage';
+import ImagePage from '../pages/image/ImagePage';
 import ClusterPage from '../pages/cluster/ClusterPage';
 import ApiDocumentationPage from '../pages/api-documentation/ApiDocumentationPage';
 
@@ -31,8 +31,8 @@ const MainRoutes = {
       element: <ClusterPage />
     },
     {
-      path: 'pictures',
-      element: <PicturesPage />
+      path: 'image',
+      element: <ImagePage />
     },
     {
       path: 'users',

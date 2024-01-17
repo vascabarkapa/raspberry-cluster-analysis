@@ -1,8 +1,8 @@
 // material-ui
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function createData(trackingNo, nodeName, pictureName, numberOfFaces, processingTime, createdAt) {
-  return { trackingNo, nodeName, pictureName, numberOfFaces, processingTime, createdAt };
+function createData(trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt) {
+  return { trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt };
 }
 
 function getRandomNumber(min, max) {
@@ -46,15 +46,15 @@ function getRandomDate() {
 const rows = Array.from({ length: 20 }, (_, index) => {
   const trackingNo = `objectId_${index + 1}`;
   const nodeName = 'RASPB_CAM_1';
-  const pictureName = generateRandomString(16);
+  const imageName = generateRandomString(16);
   const numberOfFaces = getRandomNumber(1, 30);
   const processingTime = generateRandomDecimal(0.001, 0.1, 3);
   const createdAt = getRandomDate();
 
-  return createData(trackingNo, nodeName, pictureName, numberOfFaces, processingTime, createdAt);
+  return createData(trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt);
 });
 
-// ==============================|| PICTURES TABLE - HEADER CELL ||============================== //
+// ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
 const headCells = [
   {
@@ -70,10 +70,10 @@ const headCells = [
     label: 'Node Name'
   },
   {
-    id: 'pictureName',
+    id: 'imageName',
     align: 'left',
     disablePadding: false,
-    label: 'Picture Name'
+    label: 'Image Name'
   },
   {
     id: 'numberOfFaces',
@@ -95,9 +95,9 @@ const headCells = [
   }
 ];
 
-// ==============================|| PICTURES TABLE - HEADER ||============================== //
+// ==============================|| IMAGE TABLE - HEADER ||============================== //
 
-function PicturesTableHead() {
+function ImageTableHead() {
   return (
     <TableHead>
       <TableRow>
@@ -111,9 +111,9 @@ function PicturesTableHead() {
   );
 }
 
-// ==============================|| PICTURES TABLE ||============================== //
+// ==============================|| IMAGE TABLE ||============================== //
 
-export default function PicturesTable() {
+export default function ImageTable() {
   return (
     <Box>
       <TableContainer
@@ -137,7 +137,7 @@ export default function PicturesTable() {
             }
           }}
         >
-          <PicturesTableHead />
+          <ImageTableHead />
           <TableBody>
             {rows.map((row) => {
               return (
@@ -152,7 +152,7 @@ export default function PicturesTable() {
                     {row.trackingNo}
                   </TableCell>
                   <TableCell align="left">{row.nodeName}</TableCell>
-                  <TableCell align="left">{row.pictureName}.jpg</TableCell>
+                  <TableCell align="left">{row.imageName}.jpg</TableCell>
                   <TableCell align="left">{row.numberOfFaces}</TableCell>
                   <TableCell align="left">{row.processingTime}s</TableCell>
                   <TableCell align="left">{row.createdAt}</TableCell>

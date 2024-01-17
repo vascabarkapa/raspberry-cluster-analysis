@@ -78,7 +78,7 @@ const DashboardDefault = () => {
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">Pictures Details</Typography>
+              <Typography variant="h5">Image Details</Typography>
             </Grid>
             <Grid item>
               <Stack direction="row" alignItems="center" spacing={0}>
