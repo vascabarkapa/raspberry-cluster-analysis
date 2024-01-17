@@ -8,10 +8,16 @@ Cloudberry is a project created for the "Advanced Computer Architectures" course
 
 - **Distributed Data Processing:** Cloudberry utilizes a cluster of Raspberry Pi devices to perform data processing tasks in a distributed manner.
 
-- **Data Processing:** The cluster of Raspberry Pis performs data processing tasks and stores the results in the cloud.
+- **Real-time Monitoring:** Cloudberry offers real-time monitoring capabilities, allowing administrators to observe the performance and status of each Raspberry Pi in the cluster. This includes metrics such as CPU usage, memory utilization, and network activity.
 
-- **Dashboard:** The application provides a user-friendly dashboard to monitor and manage data processing tasks.
-  
+- **Notification System:** The application features a notification system that alerts administrators about critical events, task completions, or any anomalies in the system. Notifications can be customized based on the severity of the event.
+
+- **Data Visualization:** The app incorporates data visualization tools to represent processed data and statistics in an easy-to-understand format. This includes charts, graphs, and other visual aids to facilitate quick analysis of the data.
+
+- **Customizable Reports:** Cloudberry allows administrators to generate customizable reports on cluster performance, data processing efficiency, and other relevant metrics. These reports can be exported in various formats for further analysis or presentation.
+
+- **User Access Control:** The admin app incorporates user access control features, allowing administrators to define roles and permissions for different users. This ensures that only authorized personnel can access and modify specific aspects of the system.
+
 - **MERN Stack:** The application is developed using the MERN stack, which includes MongoDB for the database, Express.js for the backend, React for the frontend, and Node.js as the runtime environment.
 
 ## Installation
@@ -23,12 +29,12 @@ To run the Cloudberry project locally, follow these steps:
     git clone https://github.com/vascabarkapa/raspberry-cluster-analysis.git
 2. Set up the environment variables:
     ```bash
-    PORT=
-    ENVIRONMENT=
-    CONNECTION_STRING="create account on mongoDb"
-    ACCESS_TOKEN_SECRET=
-    API_URL=
-    FRONT_URL=
+    PORT="Specifies the port on which your application will listen for HTTP requests"
+    ENVIRONMENT="Indicates the environment in which the application is running"
+    CONNECTION_STRING="Provide the connection string for connecting to your MongoDB database"
+    ACCESS_TOKEN_SECRET="Secret key used for signing and verifying JWT (JSON Web Token) tokens"
+    API_URL="Specifies the URL of your API service, e.g. http://localhost:5001/api"
+    FRONT_URL="URL for the frontend application, e.g. http://localhost:3000"
 3. Navigate to project directory:
     ```bash
     cd raspberry-cluster-analysis
