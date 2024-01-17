@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/vascabarkapa/raspberry-cluster-analysis/main/client/src/assets/images/logo/cloudberry_logo.png" alt="Cloudberry Logo" width="50" />
+<a style="cursor: none" href="#"><img src="https://raw.githubusercontent.com/vascabarkapa/raspberry-cluster-analysis/main/client/src/assets/images/logo/cloudberry_logo.png" alt="Cloudberry Logo" width="50"></a>
 
 # Cloudberry Project
 
@@ -62,6 +62,8 @@ To run the Cloudberry project locally, follow these steps:
 - **Express:** At the core of the backend infrastructure, Express serves as the web application framework. Its minimalistic and flexible design enables the seamless development of a robust API, providing efficient communication between the frontend and the database.
 - **React** Powering the frontend, React stands as the library of choice for constructing dynamic and interactive user interfaces. Its component-based architecture promotes modular and maintainable code, facilitating an enhanced user experience.
 - **Node:** As the runtime environment for server-side JavaScript execution, Node plays a pivotal role in ensuring the smooth functioning of the application. Its event-driven, non-blocking I/O model contributes to the overall responsiveness and scalability of the system.
+
+### Check out the demo version here: [DEMO](https://cloudberry-system.netlify.app/)
 
 ## License
 
