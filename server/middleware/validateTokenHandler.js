@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
+import {accessTokenSecret} from './../config/index.js';
 
 const validateToken = asyncHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
@@ -12,7 +13,7 @@ const validateToken = asyncHandler(async (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const decoded = jwt.verify(token, accessTokenSecret);
     req.user = decoded.user;
     next();
   } catch (err) {
