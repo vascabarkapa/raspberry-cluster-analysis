@@ -1,5 +1,5 @@
-const asyncHandler = require("express-async-handler");
-const User = require("../../models/userModel");
+import asyncHandler from "express-async-handler";
+import User from "../../models/userModel";
 
 export default asyncHandler(async (req, res) => {
     try {
