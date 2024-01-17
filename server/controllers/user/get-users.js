@@ -3,7 +3,7 @@ import User from '../../models/userModel.js';
 
 export default asyncHandler(async (req, res) => {
     try {
-        const users = await User.find().sort({ createdAt: -1 }).lean();
+        const users = await User.find().sort({ createdAt: -1 });
         res.json(users);
     } catch (error) {
         console.error("Error retrieving users from the database:", error);
