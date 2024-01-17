@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import Cluster from '../../models/clusterModel.js';
+import { Cluster } from './../../models/index.js';
 
 export default asyncHandler(async (req, res) => {
   try {

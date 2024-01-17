@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import Image from '../../models/imageModel.js';
+import { Image } from './../../models/index.js';
 
 export default asyncHandler(async (req, res) => {
   try {

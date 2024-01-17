@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import asyncHandler from 'express-async-handler';
-import User from '../../models/userModel.js';
+import { User } from './../../models/index.js';
 
 export default asyncHandler(async (req, res) => {
     try {
