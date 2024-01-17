@@ -63,7 +63,7 @@ To run the Cloudberry project locally, follow these steps:
 - **React** Powering the frontend, React stands as the library of choice for constructing dynamic and interactive user interfaces. Its component-based architecture promotes modular and maintainable code, facilitating an enhanced user experience.
 - **Node:** As the runtime environment for server-side JavaScript execution, Node plays a pivotal role in ensuring the smooth functioning of the application. Its event-driven, non-blocking I/O model contributes to the overall responsiveness and scalability of the system.
 
-### Check out the demo version here: <a href="https://cloudberry-system.netlify.app/" target="_blank">DEMO APP</a>
+### Check out the demo version here: [DEMO APP](https://cloudberry-system.netlify.app)
 
 
 ## License
