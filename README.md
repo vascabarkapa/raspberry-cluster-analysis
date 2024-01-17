@@ -54,11 +54,11 @@ To run the Cloudberry project locally, follow these steps:
     yarn start
 8. Open your web browser and navigate to http://localhost:3000 to access the Cloudberry application.
 
-## Technologies Used
-- **MongoDB:** Database for storing processed data.
-- **Express:** Backend framework for building the API.
-- **React** Frontend library for building user interfaces.
-- **Node:** Runtime environment for executing JavaScript on the server.
+## Technologies Stack
+- **MongoDB:** Serving as the database solution, MongoDB is employed for the storage of processed data. Its flexible and scalable NoSQL architecture makes it an ideal choice for handling diverse datasets.
+- **Express:** At the core of the backend infrastructure, Express serves as the web application framework. Its minimalistic and flexible design enables the seamless development of a robust API, providing efficient communication between the frontend and the database.
+- **React** Powering the frontend, React stands as the library of choice for constructing dynamic and interactive user interfaces. Its component-based architecture promotes modular and maintainable code, facilitating an enhanced user experience.
+- **Node:** As the runtime environment for server-side JavaScript execution, Node plays a pivotal role in ensuring the smooth functioning of the application. Its event-driven, non-blocking I/O model contributes to the overall responsiveness and scalability of the system.
 
 ## License
 
