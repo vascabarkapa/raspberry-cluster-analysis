@@ -1,5 +1,5 @@
-import asyncHandler from "express-async-handler";
-import User from "../../models/userModel";
+import asyncHandler from 'express-async-handler';
+import User from '../../models/userModel.js';
 
 export default asyncHandler(async (req, res) => {
     try {
