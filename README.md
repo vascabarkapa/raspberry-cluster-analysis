@@ -1,7 +1,5 @@
 # Cloudberry Project
-
-## Overview
-
+#### NOTE: This is a test version. Project under development. 
 Cloudberry is a project created for the "Advanced Computer Architectures" course as part of the Master's program at the Faculty of Electrical Engineering, University of East Sarajevo. This project serves as a cloud application designed to store the results of data processing performed by a cluster of Raspberry Pi devices. The application is implemented using the MERN (MongoDB, Express.js, React, Node.js) stack.
 
 ## Features
