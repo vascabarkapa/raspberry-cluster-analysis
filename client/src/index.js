@@ -15,8 +15,9 @@ import 'assets/third-party/apex-chart.css';
 // project import
 import App from './App';
 import { store } from 'store';
-import CloudberryFullLogo from 'components/logo/FullLogo';
+import CloudberryFullLogo from 'components/loading/FullLogo';
 import reportWebVitals from './reportWebVitals';
+import Dots from 'components/loading/Dots';
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
@@ -29,7 +30,7 @@ const MainApp = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 15000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -40,8 +41,10 @@ const MainApp = () => {
         <BrowserRouter>
           {loading ? (
             // Loading screen
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-              <CloudberryFullLogo width={300}/>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              <CloudberryFullLogo width={ 250 } />
+              <div style={{ height: '15px' }}></div>
+              <Dots />
             </div>
           ) : (
             // Main application

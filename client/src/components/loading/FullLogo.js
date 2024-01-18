@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 // assets
 import cloudberry from 'assets/images/logo/cloudberry.png';
 
-const CloudberryFullLogo = ({width}) => {
+const CloudberryFullLogo = ({ width }) => {
     return (
-        <img src={cloudberry} width={width} alt="cloudberry_logo" />
+        <img src={ cloudberry } width={ width } alt="cloudberry_logo" />
     )
 }
 
