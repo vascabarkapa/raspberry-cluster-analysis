@@ -4,13 +4,11 @@ import PropTypes from 'prop-types';
 import cloudberry from 'assets/images/logo/cloudberry.png';
 
 const CloudberryFullLogo = ({ width }) => {
-    return (
-        <img src={ cloudberry } width={ width } alt="cloudberry_logo" />
-    )
-}
+  return <img src={cloudberry} width={width} alt="cloudberry_logo" />;
+};
 
 CloudberryFullLogo.propTypes = {
-    width: PropTypes.number
-  };
+  width: PropTypes.number
+};
 
 export default CloudberryFullLogo;

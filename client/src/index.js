@@ -42,7 +42,7 @@ const MainApp = () => {
           {loading ? (
             // Loading screen
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-              <CloudberryFullLogo width={ 250 } />
+              <CloudberryFullLogo width={250} />
               <div style={{ height: '15px' }}></div>
               <Dots />
             </div>
