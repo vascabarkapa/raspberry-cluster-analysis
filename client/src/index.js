@@ -15,8 +15,10 @@ import 'assets/third-party/apex-chart.css';
 // project import
 import App from './App';
 import { store } from 'store';
-import CloudberryFullLogo from 'components/loading/FullLogo';
 import reportWebVitals from './reportWebVitals';
+
+// components
+import CloudberryFullLogo from 'components/loading/FullLogo';
 import Dots from 'components/loading/Dots';
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
