@@ -6,8 +6,8 @@ import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 // project import
 import Dot from 'components/@extended/Dot';
 
-function createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt) {
-  return { _id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt };
+function createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt) {
+  return { _id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt };
 }
 
 function getRandomNumber(min, max) {
@@ -38,10 +38,10 @@ const rows = Array.from({ length: 20 }, (_, index) => {
   const maxPods = getRandomNumber(4, 10);
   const replicas = getRandomNumber(1, 6);
   const load = getRandomNumber(1, 100);
-  const maxLoad = getRandomNumber(1, 100);
+  const loadThreshold = getRandomNumber(1, 100);
   const createdAt = getRandomDate();
 
-  return createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt);
+  return createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt);
 });
 
 // ==============================|| CLUSTER TABLE - HEADER CELL ||============================== //
@@ -87,7 +87,7 @@ const headCells = [
     id: 'load',
     align: 'left',
     disablePadding: false,
-    label: 'Load (max)'
+    label: 'Load (Threshold)'
   },
   {
     id: 'createdAt',
@@ -115,7 +115,7 @@ function ClusterTableHead() {
 
 // ==============================|| CLUSTER TABLE - STATUS ||============================== //
 
-const ClusterStatus = ({ load, maxLoad }) => {
+const ClusterStatus = ({ load, loadThreshold }) => {
   let color;
 
   if (load >= 0 && load < 40) {
@@ -132,14 +132,14 @@ const ClusterStatus = ({ load, maxLoad }) => {
     <Stack direction="row" spacing={1} alignItems="center">
       <Dot color={color} />
       <Typography>{load}%</Typography>
-      <Typography>({maxLoad}%)</Typography>
+      <Typography>({loadThreshold}%)</Typography>
     </Stack>
   );
 };
 
 ClusterStatus.propTypes = {
   load: PropTypes.number,
-  maxLoad: PropTypes.number
+  loadThreshold: PropTypes.number
 };
 
 // ==============================|| CLUSTER TABLE ||============================== //
@@ -182,7 +182,7 @@ export default function ClusterTable() {
                   <TableCell align="left">{row.maxPods}</TableCell>
                   <TableCell align="left">{row.replicas}</TableCell>
                   <TableCell align="left">
-                    <ClusterStatus load={row.load} maxLoad={row.maxLoad} />
+                    <ClusterStatus load={row.load} loadThreshold={row.loadThreshold} />
                   </TableCell>
                   <TableCell align="left">{row.createdAt}</TableCell>
                 </TableRow>

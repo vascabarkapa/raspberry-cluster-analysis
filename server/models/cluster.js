@@ -26,9 +26,9 @@ const clusterSchema = new Schema({
       type: Number,
       required: [true, "Cluster Load is required"]
     },
-    maxLoad: {
+    loadThreshold: {
       type: Number,
-      required: [true, "Maximal number of Load is required"]
+      required: [true, "Threshold od Load is required"]
     },
   }, {
     timestamps: true
