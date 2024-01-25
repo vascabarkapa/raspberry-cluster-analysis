@@ -17,6 +17,10 @@ const imageSchema = new Schema({
     processingTime: {
       type: Number,
       required: [true, "Processing Time is required"]
+    },
+    takenAt: {
+      type: Date,
+      required: [true, "Taken At date and time are required"]
     }
   }, {
     timestamps: true
