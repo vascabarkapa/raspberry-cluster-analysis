@@ -6,8 +6,8 @@ import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 // project import
 import Dot from 'components/@extended/Dot';
 
-function createData(trackingNo, clusterLoad, numberOfPods, numberOfNodes, createdAt) {
-  return { trackingNo, clusterLoad, numberOfPods, numberOfNodes, createdAt };
+function createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt) {
+  return { _id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt };
 }
 
 function getRandomNumber(min, max) {
@@ -31,41 +31,63 @@ function getRandomDate() {
 }
 
 const rows = Array.from({ length: 20 }, (_, index) => {
-  const trackingNo = `objectId_${index + 1}`;
-  const clusterLoad = getRandomNumber(0, 100);
-  const numberOfPods = getRandomNumber(1, 4);
-  const numberOfNodes = getRandomNumber(1, 6);
+  const _id = `objectId_${index + 1}`;
+  const age = getRandomNumber(1, 30);
+  const numberOfNodes = getRandomNumber(1, 4);
+  const minPods = getRandomNumber(1, 4);
+  const maxPods = getRandomNumber(4, 10);
+  const replicas = getRandomNumber(1, 6);
+  const load = getRandomNumber(1, 100);
+  const maxLoad = getRandomNumber(1, 100);
   const createdAt = getRandomDate();
 
-  return createData(trackingNo, clusterLoad, numberOfPods, numberOfNodes, createdAt);
+  return createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, maxLoad, createdAt);
 });
 
 // ==============================|| CLUSTER TABLE - HEADER CELL ||============================== //
 
 const headCells = [
   {
-    id: 'trackingNo',
+    id: '_id',
     align: 'left',
     disablePadding: false,
-    label: 'Tracking No.'
+    label: 'ID'
   },
   {
-    id: 'clusterLoad',
+    id: 'age',
     align: 'left',
     disablePadding: true,
-    label: 'Cluster Load'
-  },
-  {
-    id: 'numberOfPods',
-    align: 'left',
-    disablePadding: false,
-    label: 'Number of Pods'
+    label: 'Age'
   },
   {
     id: 'numberOfNodes',
     align: 'left',
     disablePadding: false,
     label: 'Number of Nodes'
+  },
+  {
+    id: 'minPods',
+    align: 'left',
+    disablePadding: false,
+    label: 'Min. Pods'
+  },
+  {
+    id: 'maxPods',
+    align: 'left',
+    disablePadding: false,
+    label: 'Max. Pods'
+  },
+  {
+    id: 'replicas',
+    align: 'left',
+    disablePadding: false,
+    label: 'Replicas'
+  },
+  {
+    id: 'load',
+    align: 'left',
+    disablePadding: false,
+    label: 'Load (max)'
   },
   {
     id: 'createdAt',
@@ -93,14 +115,14 @@ function ClusterTableHead() {
 
 // ==============================|| CLUSTER TABLE - STATUS ||============================== //
 
-const ClusterStatus = ({ status }) => {
+const ClusterStatus = ({ load, maxLoad }) => {
   let color;
 
-  if (status >= 0 && status < 40) {
+  if (load >= 0 && load < 40) {
     color = 'success';
-  } else if (status >= 40 && status < 75) {
+  } else if (load >= 40 && load < 75) {
     color = 'warning';
-  } else if (status >= 75 && status <= 100) {
+  } else if (load >= 75 && load <= 100) {
     color = 'error';
   } else {
     color = 'primary';
@@ -109,13 +131,15 @@ const ClusterStatus = ({ status }) => {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
       <Dot color={color} />
-      <Typography>{status}%</Typography>
+      <Typography>{load}%</Typography>
+      <Typography>({maxLoad}%)</Typography>
     </Stack>
   );
 };
 
 ClusterStatus.propTypes = {
-  status: PropTypes.number
+  load: PropTypes.number,
+  maxLoad: PropTypes.number
 };
 
 // ==============================|| CLUSTER TABLE ||============================== //
@@ -148,21 +172,18 @@ export default function ClusterTable() {
           <TableBody>
             {rows.map((row) => {
               return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  tabIndex={-1}
-                  key={row.trackingNo}
-                >
+                <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={row._id}>
                   <TableCell component="th" scope="row" align="left">
-                    {row.trackingNo}
+                    {row._id}
                   </TableCell>
-                  <TableCell align="left">
-                    <ClusterStatus status={row.clusterLoad} />
-                  </TableCell>
-                  <TableCell align="left">{row.numberOfPods}</TableCell>
+                  <TableCell align="left">{row.age} min</TableCell>
                   <TableCell align="left">{row.numberOfNodes}</TableCell>
+                  <TableCell align="left">{row.minPods}</TableCell>
+                  <TableCell align="left">{row.maxPods}</TableCell>
+                  <TableCell align="left">{row.replicas}</TableCell>
+                  <TableCell align="left">
+                    <ClusterStatus load={row.load} maxLoad={row.maxLoad} />
+                  </TableCell>
                   <TableCell align="left">{row.createdAt}</TableCell>
                 </TableRow>
               );
