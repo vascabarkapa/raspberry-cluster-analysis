@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 const {Schema, model} = mongoose;
 
 const imageSchema = new Schema({
-    nodeName: {
+    node: {
       type: String,
       required: [true, "Node Name is required"]
     },
-    imageName: {
+    image: {
       type: String,
       required: [true, "Image Name is required"]
     },
