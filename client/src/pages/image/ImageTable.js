@@ -1,8 +1,8 @@
 // material-ui
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function createData(_id, node, image, numberOfFaces, processingTime, createdAt) {
-  return { _id, node, image, numberOfFaces, processingTime, createdAt };
+function createData(_id, node, image, numberOfFaces, processingTime, takenAt) {
+  return { _id, node, image, numberOfFaces, processingTime, takenAt };
 }
 
 function getRandomNumber(min, max) {
@@ -43,9 +43,9 @@ const rows = Array.from({ length: 20 }, (_, index) => {
   const image = generateRandomString(16);
   const numberOfFaces = getRandomNumber(1, 30);
   const processingTime = getRandomNumber(100, 600);
-  const createdAt = getRandomDate();
+  const takenAt = getRandomDate();
 
-  return createData(_id, node, image, numberOfFaces, processingTime, createdAt);
+  return createData(_id, node, image, numberOfFaces, processingTime, takenAt);
 });
 
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
@@ -82,7 +82,7 @@ const headCells = [
     label: 'FR Processing Time'
   },
   {
-    id: 'createdAt',
+    id: 'takenAt',
     align: 'left',
     disablePadding: false,
     label: 'Timestamp'
@@ -143,7 +143,7 @@ export default function ImageTable() {
                   <TableCell align="left">{row.image}.jpg</TableCell>
                   <TableCell align="left">{row.numberOfFaces}</TableCell>
                   <TableCell align="left">{row.processingTime}ms</TableCell>
-                  <TableCell align="left">{row.createdAt}</TableCell>
+                  <TableCell align="left">{row.takenAt}</TableCell>
                 </TableRow>
               );
             })}
