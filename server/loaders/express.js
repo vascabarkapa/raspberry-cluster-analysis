@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import {prefix, frontUrl} from './../config/index.js';
 import routes from './../routes/index.js';
-import errorHandler from './../middleware/errorHandler.js';
 import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -21,7 +20,6 @@ export default (server) => {
   server.disable('etag');
 
   server.use(prefix, routes);
-  // server.use(errorHandler);
 
   server.get('/', (_req, res) => {
     return res.status(200).json('Project is successfully working...').end();
