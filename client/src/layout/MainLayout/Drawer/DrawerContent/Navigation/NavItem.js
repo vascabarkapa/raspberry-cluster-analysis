@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material';
 
 // project import
-import { activeItem } from 'store/reducers/menu';
+import { activeItem, openDrawer } from 'store/reducers/menu';
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
@@ -18,6 +18,10 @@ const NavItem = ({ item, level }) => {
   const { pathname } = useLocation();
 
   const { drawerOpen, openItem } = useSelector((state) => state.menu);
+
+  const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const [open, setOpen] = useState(drawerOpen);
 
   let itemTarget = '_self';
   if (item.target) {
@@ -31,6 +35,11 @@ const NavItem = ({ item, level }) => {
 
   const itemHandler = (id) => {
     dispatch(activeItem({ openItem: [id] }));
+
+    if (matchDownMD) {
+      setOpen(!open);
+      dispatch(openDrawer({ drawerOpen: !open }));
+    }
   };
 
   const Icon = item.icon;
