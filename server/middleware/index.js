@@ -1,1 +1,1 @@
-export {default as auth} from './validate-token.js';
+export {default as auth} from './validateToken.js';
