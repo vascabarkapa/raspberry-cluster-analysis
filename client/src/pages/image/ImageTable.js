@@ -1,8 +1,8 @@
 // material-ui
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function createData(trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt) {
-  return { trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt };
+function createData(_id, node, image, numberOfFaces, processingTime, createdAt) {
+  return { _id, node, image, numberOfFaces, processingTime, createdAt };
 }
 
 function getRandomNumber(min, max) {
@@ -19,12 +19,6 @@ function generateRandomString(length) {
   }
 
   return result;
-}
-
-function generateRandomDecimal(min, max, decimalPlaces) {
-  const randomValue = Math.random() * (max - min) + min;
-  const roundedValue = randomValue.toFixed(decimalPlaces);
-  return parseFloat(roundedValue);
 }
 
 function getRandomDate() {
@@ -44,36 +38,36 @@ function getRandomDate() {
 }
 
 const rows = Array.from({ length: 20 }, (_, index) => {
-  const trackingNo = `objectId_${index + 1}`;
-  const nodeName = 'RASPB_CAM_1';
-  const imageName = generateRandomString(16);
+  const _id = `objectId_${index + 1}`;
+  const node = 'RASPB_CAM_1';
+  const image = generateRandomString(16);
   const numberOfFaces = getRandomNumber(1, 30);
-  const processingTime = generateRandomDecimal(0.001, 0.1, 3);
+  const processingTime = getRandomNumber(100, 600);
   const createdAt = getRandomDate();
 
-  return createData(trackingNo, nodeName, imageName, numberOfFaces, processingTime, createdAt);
+  return createData(_id, node, image, numberOfFaces, processingTime, createdAt);
 });
 
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
 const headCells = [
   {
-    id: 'trackingNo',
+    id: '_id',
     align: 'left',
     disablePadding: false,
-    label: 'Tracking No.'
+    label: 'ID'
   },
   {
-    id: 'nodeName',
+    id: 'node',
     align: 'left',
     disablePadding: true,
-    label: 'Node Name'
+    label: 'Node'
   },
   {
-    id: 'imageName',
+    id: 'image',
     align: 'left',
     disablePadding: false,
-    label: 'Image Name'
+    label: 'Image'
   },
   {
     id: 'numberOfFaces',
@@ -85,7 +79,7 @@ const headCells = [
     id: 'processingTime',
     align: 'left',
     disablePadding: false,
-    label: 'Processing Time'
+    label: 'FR Processing Time'
   },
   {
     id: 'createdAt',
@@ -141,20 +135,14 @@ export default function ImageTable() {
           <TableBody>
             {rows.map((row) => {
               return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  tabIndex={-1}
-                  key={row.trackingNo}
-                >
+                <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={row._id}>
                   <TableCell component="th" scope="row" align="left">
-                    {row.trackingNo}
+                    {row._id}
                   </TableCell>
-                  <TableCell align="left">{row.nodeName}</TableCell>
-                  <TableCell align="left">{row.imageName}.jpg</TableCell>
+                  <TableCell align="left">{row.node}</TableCell>
+                  <TableCell align="left">{row.image}.jpg</TableCell>
                   <TableCell align="left">{row.numberOfFaces}</TableCell>
-                  <TableCell align="left">{row.processingTime}s</TableCell>
+                  <TableCell align="left">{row.processingTime}ms</TableCell>
                   <TableCell align="left">{row.createdAt}</TableCell>
                 </TableRow>
               );
