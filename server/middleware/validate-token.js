@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import {accessTokenSecret} from './../config/index.js';
 
-const validateToken = asyncHandler(async (req, res, next) => {
+export default asyncHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
 
   if (!authHeader || !authHeader.toLowerCase().startsWith("bearer ")) {
@@ -21,5 +21,3 @@ const validateToken = asyncHandler(async (req, res, next) => {
     throw new Error("User is not authorized!");
   }
 });
-
-export default validateToken;
