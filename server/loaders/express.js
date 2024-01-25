@@ -21,7 +21,7 @@ export default (server) => {
   server.disable('etag');
 
   server.use(prefix, routes);
-  server.use(errorHandler);
+  // server.use(errorHandler);
 
   server.get('/', (_req, res) => {
     return res.status(200).json('Project is successfully working...').end();
