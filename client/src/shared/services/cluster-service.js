@@ -1,6 +1,6 @@
-import {get, post} from "./api-client";
+import { get, post } from './api-client';
 
-const ENDPOINT = "/cluster";
+const ENDPOINT = '/cluster';
 
 function getClusters() {
   return get(ENDPOINT);
@@ -11,7 +11,8 @@ function createClusters(user) {
 }
 
 const ImageService = {
-  getClusters, createClusters
-}
+  getClusters,
+  createClusters
+};
 
 export default ImageService;
