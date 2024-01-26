@@ -7,6 +7,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import AuthService from '../../../shared/services/auth-service';
 
 const AuthLogin = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => {
@@ -31,12 +32,14 @@ const AuthLogin = () => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            setIsLoading(true);
             setStatus({ success: false });
             setSubmitting(false);
 
             AuthService.login(values.email, values.password).then((response) => {
               if (response) {
                 localStorage.setItem('token', response?.data?.accessToken);
+                setIsLoading(false);
                 window.location.href = '/';
               }
             });
@@ -44,6 +47,7 @@ const AuthLogin = () => {
             setStatus({ success: false });
             setErrors({ submit: err.message });
             setSubmitting(false);
+            setIsLoading(false);
           }
         }}
       >
@@ -113,8 +117,8 @@ const AuthLogin = () => {
               )}
               <Grid item xs={12} sx={{ mt: 5 }}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Login
+                  <Button disableElevation disabled={isLoading || isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                    {isLoading ? 'Loading...' : 'Login'}
                   </Button>
                 </AnimateButton>
               </Grid>
