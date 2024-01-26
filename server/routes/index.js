@@ -1,8 +1,8 @@
 import {Router} from 'express';
-import userRoutes from './userRoutes.js';
-import clusterRoutes from './clusterRoutes.js';
-import authRoutes from './authRoutes.js';
-import imageRoutes from './imageRoutes.js';
+import userRoutes from './user.js';
+import clusterRoutes from './cluster.js';
+import authRoutes from './auth.js';
+import imageRoutes from './image.js';
 
 const router = Router();
 router.use('/auth', authRoutes);
