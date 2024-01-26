@@ -6,14 +6,12 @@ import Loadable from 'components/Loadable';
 import MinimalLayout from 'layout/MinimalLayout';
 import ErrorPage from '../pages/error/ErrorPage';
 
+import { isAuthenticated } from '../utils/UserAuthenticated';
+
 // render - login
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
 
 // ==============================|| AUTH ROUTING ||============================== //
-
-const isAuthenticated = () => {
-  return localStorage.getItem('token') !== null;
-};
 
 const LoginRoutes = {
   path: '/',

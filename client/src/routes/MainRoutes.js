@@ -9,14 +9,12 @@ import ImagePage from '../pages/image/ImagePage';
 import ClusterPage from '../pages/cluster/ClusterPage';
 import ApiDocumentationPage from '../pages/api-documentation/ApiDocumentationPage';
 
+import { isAuthenticated } from '../utils/UserAuthenticated';
+
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // ==============================|| MAIN ROUTING ||============================== //
-
-const isAuthenticated = () => {
-  return localStorage.getItem('token') !== null;
-};
 
 const MainRoutes = {
   path: '/',
