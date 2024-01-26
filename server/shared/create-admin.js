@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import {User} from '../models/index.js';
 
 export default async function createAdminIfNotExists() {
@@ -10,7 +11,7 @@ export default async function createAdminIfNotExists() {
         last_name: 'Admin',
         email: 'admin@cloudberry.com',
         username: 'admin',
-        password: 'admin',
+        password: await bcrypt.hash('admin', 10),
       });
 
       await adminUser.save();
