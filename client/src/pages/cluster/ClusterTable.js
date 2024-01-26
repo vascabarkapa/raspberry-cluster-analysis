@@ -1,48 +1,14 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from '@mui/material';
 
 // project import
 import Dot from 'components/@extended/Dot';
-
-function createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt) {
-  return { _id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt };
-}
-
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomDate() {
-  const startDate = new Date(2022, 0, 1);
-  const endDate = new Date();
-  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
-  const randomDate = new Date(randomTime);
-
-  const day = String(randomDate.getDate()).padStart(2, '0');
-  const month = String(randomDate.getMonth() + 1).padStart(2, '0');
-  const year = randomDate.getFullYear();
-  const hours = String(randomDate.getHours()).padStart(2, '0');
-  const minutes = String(randomDate.getMinutes()).padStart(2, '0');
-  const seconds = String(randomDate.getSeconds()).padStart(2, '0');
-
-  return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
-}
-
-const rows = Array.from({ length: 20 }, (_, index) => {
-  const _id = `objectId_${index + 1}`;
-  const age = getRandomNumber(1, 30);
-  const numberOfNodes = getRandomNumber(1, 4);
-  const minPods = getRandomNumber(1, 4);
-  const maxPods = getRandomNumber(4, 10);
-  const replicas = getRandomNumber(1, 6);
-  const load = getRandomNumber(1, 100);
-  const loadThreshold = getRandomNumber(1, 100);
-  const createdAt = getRandomDate();
-
-  return createData(_id, age, numberOfNodes, minPods, maxPods, replicas, load, loadThreshold, createdAt);
-});
+import {useEffect, useState} from "react";
+import ClusterService from "../../shared/services/cluster-service";
+import TableLoading from "../../components/loading/TableLoading";
+import TableEmpty from "../../components/loading/TableEmpty";
 
 // ==============================|| CLUSTER TABLE - HEADER CELL ||============================== //
 
@@ -115,7 +81,7 @@ function ClusterTableHead() {
 
 // ==============================|| CLUSTER TABLE - STATUS ||============================== //
 
-const ClusterStatus = ({ load, loadThreshold }) => {
+const ClusterStatus = ({load, loadThreshold}) => {
   let color;
 
   if (load >= 0 && load < 40) {
@@ -130,7 +96,7 @@ const ClusterStatus = ({ load, loadThreshold }) => {
 
   return (
     <Stack direction="row" spacing={1} alignItems="center">
-      <Dot color={color} />
+      <Dot color={color}/>
       <Typography>{load}%</Typography>
       <Typography>({loadThreshold}%)</Typography>
     </Stack>
@@ -145,6 +111,20 @@ ClusterStatus.propTypes = {
 // ==============================|| CLUSTER TABLE ||============================== //
 
 export default function ClusterTable() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [clusters, setClusters] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    ClusterService.getClusters().then((response) => {
+      if (response) {
+        setClusters(response?.data);
+        setIsLoading(false);
+      }
+    });
+  }, []);
+
   return (
     <Box>
       <TableContainer
@@ -154,7 +134,7 @@ export default function ClusterTable() {
           position: 'relative',
           display: 'block',
           maxWidth: '100%',
-          '& td, & th': { whiteSpace: 'nowrap' }
+          '& td, & th': {whiteSpace: 'nowrap'}
         }}
       >
         <Table
@@ -168,27 +148,30 @@ export default function ClusterTable() {
             }
           }}
         >
-          <ClusterTableHead />
-          <TableBody>
-            {rows.map((row) => {
-              return (
-                <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={row._id}>
-                  <TableCell component="th" scope="row" align="left">
-                    {row._id}
-                  </TableCell>
-                  <TableCell align="left">{row.age} min</TableCell>
-                  <TableCell align="left">{row.numberOfNodes}</TableCell>
-                  <TableCell align="left">{row.minPods}</TableCell>
-                  <TableCell align="left">{row.maxPods}</TableCell>
-                  <TableCell align="left">{row.replicas}</TableCell>
-                  <TableCell align="left">
-                    <ClusterStatus load={row.load} loadThreshold={row.loadThreshold} />
-                  </TableCell>
-                  <TableCell align="left">{row.createdAt}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          <ClusterTableHead/>
+          {isLoading ? <TableLoading colSpan={8}/> :
+            <TableBody>
+              {(clusters && clusters?.length > 0) ? clusters.map((cluster) => {
+                return (
+                  <TableRow hover sx={{'&:last-child td, &:last-child th': {border: 0}}} key={cluster._id}>
+                    <TableCell component="th" scope="row" align="left">
+                      {cluster._id}
+                    </TableCell>
+                    <TableCell align="left">{cluster.age} min</TableCell>
+                    <TableCell align="left">{cluster.numberOfNodes}</TableCell>
+                    <TableCell align="left">{cluster.minPods}</TableCell>
+                    <TableCell align="left">{cluster.maxPods}</TableCell>
+                    <TableCell align="left">{cluster.replicas}</TableCell>
+                    <TableCell align="left">
+                      <ClusterStatus load={cluster.load} loadThreshold={cluster.loadThreshold}/>
+                    </TableCell>
+                    <TableCell align="left">{cluster.createdAt}</TableCell>
+                  </TableRow>
+                );
+              }) : (
+                <TableEmpty colSpan={8} text={'No Cluster information'}/>
+              )}
+            </TableBody>}
         </Table>
       </TableContainer>
     </Box>
