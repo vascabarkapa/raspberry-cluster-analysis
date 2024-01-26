@@ -26,7 +26,6 @@ import Transitions from 'components/@extended/Transitions';
 import ProfileTab from './ProfileTab';
 
 // assets
-import avatar2 from 'assets/images/users/avatar-2.png';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 // tab panel wrapper
@@ -56,6 +55,8 @@ function a11yProps(index) {
 const Profile = () => {
   const theme = useTheme();
   const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
+  const CURRENT_USER = JSON.parse(localStorage.getItem('current_user'));
 
   const handleLogout = async () => {
     localStorage.removeItem('access_token');
@@ -100,8 +101,10 @@ const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar sx={{ width: 32, height: 32 }}>CA</Avatar>
-          {!matchesXs && <Typography variant="subtitle1">Cloudberry Admin</Typography>}
+          <Avatar alt="profile_user" sx={{ width: 32, height: 32, backgroundColor: '#1890ff' }}>
+            {CURRENT_USER.first_name[0] + CURRENT_USER.last_name[0]}
+          </Avatar>
+          {!matchesXs && <Typography variant="subtitle1">{CURRENT_USER.first_name + ' ' + CURRENT_USER.last_name}</Typography>}
         </Stack>
       </ButtonBase>
       <Popper
@@ -142,9 +145,11 @@ const Profile = () => {
                       <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                           <Stack direction="row" spacing={1.25} alignItems="center">
-                            <Avatar alt="profile user" src={avatar2} sx={{ width: 32, height: 32 }} />
+                            <Avatar alt="profile_user" sx={{ width: 32, height: 32, backgroundColor: '#1890ff' }}>
+                              {CURRENT_USER.first_name[0] + CURRENT_USER.last_name[0]}
+                            </Avatar>
                             <Stack>
-                              <Typography variant="h6">Cloudberry Admin</Typography>
+                              <Typography variant="h6">{CURRENT_USER.first_name + ' ' + CURRENT_USER.last_name}</Typography>
                               <Typography variant="body2" color="textSecondary">
                                 Admin
                               </Typography>
