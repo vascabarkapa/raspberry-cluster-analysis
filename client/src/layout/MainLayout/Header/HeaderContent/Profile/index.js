@@ -58,7 +58,7 @@ const Profile = () => {
   const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const handleLogout = async () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
     window.location.href = '/login';
   };
 

@@ -38,7 +38,7 @@ const AuthLogin = () => {
 
             AuthService.login(values.email, values.password).then((response) => {
               if (response) {
-                localStorage.setItem('token', response?.data?.accessToken);
+                localStorage.setItem('access_token', response?.data?.accessToken);
                 setIsLoading(false);
                 window.location.href = '/';
               }
