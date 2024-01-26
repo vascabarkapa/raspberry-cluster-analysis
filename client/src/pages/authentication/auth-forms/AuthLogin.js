@@ -117,7 +117,15 @@ const AuthLogin = () => {
               )}
               <Grid item xs={12} sx={{ mt: 5 }}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isLoading || isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                  <Button
+                    disableElevation
+                    disabled={isLoading || isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
                     {isLoading ? 'Loading...' : 'Login'}
                   </Button>
                 </AnimateButton>
