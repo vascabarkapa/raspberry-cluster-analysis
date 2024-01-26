@@ -15,7 +15,7 @@ const AuthFooter = () => {
       >
         <Typography variant="subtitle2" color="secondary" component="span">
           <Typography variant="subtitle2" color="primary" component="span">
-            &copy;&nbsp;Cloudberry
+            &copy;&nbsp;2024&nbsp;Cloudberry
           </Typography>
           &nbsp;Faculty of Electrical Engineering, University of East Sarajevo
         </Typography>
