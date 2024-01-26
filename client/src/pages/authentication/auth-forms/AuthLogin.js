@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import AuthService from '../../../shared/services/auth-service';
 
 const AuthLogin = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -32,8 +33,13 @@ const AuthLogin = () => {
           try {
             setStatus({ success: false });
             setSubmitting(false);
-            localStorage.setItem('token', 'testToken');
-            window.location.href = '/';
+
+            AuthService.login(values.email, values.password).then((response) => {
+              if (response) {
+                localStorage.setItem('token', response?.data?.accessToken);
+                window.location.href = '/';
+              }
+            });
           } catch (err) {
             setStatus({ success: false });
             setErrors({ submit: err.message });
