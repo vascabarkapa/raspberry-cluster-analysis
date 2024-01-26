@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((confiq) => {
-  const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem('token');
 
   token ? confiq.headers = {
     'Authorization': `Bearer ${token}`,
