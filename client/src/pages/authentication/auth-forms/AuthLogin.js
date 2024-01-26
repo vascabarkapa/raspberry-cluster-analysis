@@ -36,13 +36,22 @@ const AuthLogin = () => {
             setStatus({ success: false });
             setSubmitting(false);
 
-            AuthService.login(values.email, values.password).then((response) => {
-              if (response) {
-                localStorage.setItem('access_token', response?.data?.accessToken);
+            const tokenResponse = await AuthService.login(values.email, values.password);
+
+            if (tokenResponse) {
+              const accessToken = tokenResponse?.data?.accessToken;
+              localStorage.setItem('access_token', accessToken);
+
+              const userResponse = await AuthService.getCurrentUser();
+
+              if (userResponse) {
+                const currentUser = userResponse?.data?.user;
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
+
                 setIsLoading(false);
                 window.location.href = '/';
               }
-            });
+            }
           } catch (err) {
             setStatus({ success: false });
             setErrors({ submit: err.message });

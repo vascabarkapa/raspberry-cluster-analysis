@@ -11,13 +11,13 @@ function login(email, password) {
   return post(ENDPOINT + '/login', body);
 }
 
-function currentUser() {
-  return get(ENDPOINT + '/current');
+function getCurrentUser() {
+  return get(ENDPOINT + '/me');
 }
 
 const AuthService = {
   login,
-  currentUser
+  getCurrentUser
 };
 
 export default AuthService;

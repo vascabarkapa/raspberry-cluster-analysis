@@ -59,6 +59,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('current_user');
     window.location.href = '/login';
   };
 
