@@ -1,52 +1,13 @@
+import { useEffect, useState } from 'react';
 // material-ui
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function createData(_id, node, image, numberOfFaces, processingTime, takenAt) {
-  return { _id, node, image, numberOfFaces, processingTime, takenAt };
-}
+// services
+import ImageService from '../../shared/services/image-service';
 
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function generateRandomString(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
-  }
-
-  return result;
-}
-
-function getRandomDate() {
-  const startDate = new Date(2022, 0, 1);
-  const endDate = new Date();
-  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
-  const randomDate = new Date(randomTime);
-
-  const day = String(randomDate.getDate()).padStart(2, '0');
-  const month = String(randomDate.getMonth() + 1).padStart(2, '0');
-  const year = randomDate.getFullYear();
-  const hours = String(randomDate.getHours()).padStart(2, '0');
-  const minutes = String(randomDate.getMinutes()).padStart(2, '0');
-  const seconds = String(randomDate.getSeconds()).padStart(2, '0');
-
-  return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
-}
-
-const rows = Array.from({ length: 20 }, (_, index) => {
-  const _id = `objectId_${index + 1}`;
-  const node = 'RASPB_CAM_1';
-  const image = generateRandomString(16);
-  const numberOfFaces = getRandomNumber(1, 30);
-  const processingTime = getRandomNumber(100, 600);
-  const takenAt = getRandomDate();
-
-  return createData(_id, node, image, numberOfFaces, processingTime, takenAt);
-});
+// project import
+import TableLoading from '../../components/loading/TableLoading';
+import TableEmpty from '../../components/loading/TableEmpty';
 
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
@@ -108,6 +69,20 @@ function ImageTableHead() {
 // ==============================|| IMAGE TABLE ||============================== //
 
 export default function ImageTable() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    ImageService.getImages().then((response) => {
+      if (response) {
+        setImages(response?.data);
+        setIsLoading(false);
+      }
+    });
+  }, []);
+
   return (
     <Box>
       <TableContainer
@@ -132,22 +107,27 @@ export default function ImageTable() {
           }}
         >
           <ImageTableHead />
-          <TableBody>
-            {rows.map((row) => {
-              return (
-                <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={row._id}>
-                  <TableCell component="th" scope="row" align="left">
-                    {row._id}
-                  </TableCell>
-                  <TableCell align="left">{row.node}</TableCell>
-                  <TableCell align="left">{row.image}.jpg</TableCell>
-                  <TableCell align="left">{row.numberOfFaces}</TableCell>
-                  <TableCell align="left">{row.processingTime}ms</TableCell>
-                  <TableCell align="left">{row.takenAt}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          {isLoading ? (
+            <TableLoading colSpan={8} />
+          ) : (
+            <TableBody>
+              {images && images?.length > 0 ? (
+                images.map((image) => {
+                  return (
+                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={image._id}>
+                      <TableCell align="left">{image.node}</TableCell>
+                      <TableCell align="left">{image.image}.jpg</TableCell>
+                      <TableCell align="left">{image.numberOfFaces}</TableCell>
+                      <TableCell align="left">{image.processingTime}ms</TableCell>
+                      <TableCell align="left">{image.takenAt}</TableCell>
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <TableEmpty colSpan={8} text={'No Image information'} />
+              )}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
     </Box>
