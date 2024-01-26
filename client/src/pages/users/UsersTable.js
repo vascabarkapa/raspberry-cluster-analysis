@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
@@ -6,20 +6,14 @@ import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, Ta
 // assets
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
+// services
+import UserService from '../../shared/services/user-service';
+
 // components
 import UsersFormModal from './UsersFormModal';
 import UsersDeleteModal from './UsersDeleteModal';
-
-function createData(fullName, username, email, role) {
-  return { fullName, username, email, role };
-}
-
-const rows = [
-  createData('Vladimir Vujović', 'vladimir.vujovic', 'vladimir@cloudberry.com', 'Admin'),
-  createData('Marko Malović', 'marko.malovic', 'marko@cloudberry.com', 'Admin'),
-  createData('Milica Vuković', 'milica.vukovic', 'milica@cloudberry.com', 'Admin'),
-  createData('Vasilije Čabarkapa', 'vasilije.cabarkapa', 'vasilije@cloudberry.com', 'Admin')
-];
+import TableLoading from '../../components/loading/TableLoading';
+import TableEmpty from '../../components/loading/TableEmpty';
 
 // ==============================|| USERS TABLE - HEADER CELL ||============================== //
 
@@ -75,8 +69,21 @@ function UsersTableHead() {
 // ==============================|| USERS TABLE ||============================== //
 
 export default function UsersTable() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [users, setUsers] = useState([]);
   const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
   const [openUsersDeleteModal, setOpenDeleteFormModal] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    UserService.getUsers().then((response) => {
+      if (response) {
+        setUsers(response?.data);
+        setIsLoading(false);
+      }
+    });
+  }, []);
 
   const handleOpenUsersFormModal = () => {
     setOpenUsersFormModal(true);
@@ -110,30 +117,40 @@ export default function UsersTable() {
           }}
         >
           <UsersTableHead />
-          <TableBody>
-            {rows.map((row) => {
-              return (
-                <TableRow hover role="checkbox" sx={{ '&:last-child td, &:last-child th': { border: 0 } }} tabIndex={-1} key={row.username}>
-                  <TableCell align="left">{row.fullName}</TableCell>
-                  <TableCell align="left">{row.username}</TableCell>
-                  <TableCell align="left">{row.email}</TableCell>
-                  <TableCell align="left">{row.role}</TableCell>
-                  <TableCell align="right">
-                    <Tooltip title="Edit User">
-                      <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={handleOpenUsersFormModal}>
-                        <EditOutlined />
-                      </Button>
-                    </Tooltip>
-                    <Tooltip title="Delete User">
-                      <Button variant="contained" color="error" onClick={handleOpenUsersDeleteModal}>
-                        <DeleteOutlined />
-                      </Button>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          {isLoading ? (
+            <TableLoading colSpan={8} />
+          ) : (
+            <TableBody>
+              {users && users?.length > 0 ? (
+                users.map((user) => {
+                  return (
+                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={user._id}>
+                      <TableCell align="left">
+                        {user.first_name}&nbsp;{user.last_name}
+                      </TableCell>
+                      <TableCell align="left">{user.username}</TableCell>
+                      <TableCell align="left">{user.email}</TableCell>
+                      <TableCell align="left">{user.role}</TableCell>
+                      <TableCell align="right">
+                        <Tooltip title="Edit User">
+                          <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={handleOpenUsersFormModal}>
+                            <EditOutlined />
+                          </Button>
+                        </Tooltip>
+                        <Tooltip title="Delete User">
+                          <Button variant="contained" color="error" onClick={handleOpenUsersDeleteModal}>
+                            <DeleteOutlined />
+                          </Button>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <TableEmpty colSpan={8} text={'No Image information'} />
+              )}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
       {openUsersFormModal && <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} />}
