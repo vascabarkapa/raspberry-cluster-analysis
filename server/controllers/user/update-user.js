@@ -14,7 +14,7 @@ export default asyncHandler(async (req, res) => {
 
         const existingUser = await User.findOne({ email: req.body.email });
 
-        if (existingUser) {
+        if (existingUser._id.toString() !== user._id.toString() && existingUser.email === user.email) {
             res.status(400);
             throw new Error("User is already registered with that email address");
         }
