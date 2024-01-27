@@ -32,8 +32,6 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    // const ACCESS_TOKEN = localStorage.getItem('access_token');
-
     if (error?.response?.status === 400) {
       window.location.href = '400';
     }
