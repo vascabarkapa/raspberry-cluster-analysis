@@ -1,16 +1,18 @@
 import React from 'react';
 import './../../App.css';
-import { TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow, TableBody } from '@mui/material';
 import Dots from './Dots';
 import PropTypes from 'prop-types';
 
 const TableLoading = ({ colSpan }) => {
   return (
-    <TableRow>
-      <TableCell colSpan={colSpan} align="center">
-        <Dots />
-      </TableCell>
-    </TableRow>
+    <TableBody>
+      <TableRow>
+        <TableCell colSpan={colSpan} align="center">
+          <Dots />
+        </TableCell>
+      </TableRow>
+    </TableBody>
   );
 };
 
