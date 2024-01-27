@@ -108,6 +108,7 @@ export default function UsersTable() {
 
   function handleOpenUsersFormModal(type = 'add', user = null) {
     setUserToForm(null);
+    setInitialRender(true);
 
     if (type === 'edit') {
       setUserToForm(user);
