@@ -12,6 +12,9 @@ import Dot from 'components/@extended/Dot';
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
 
+// toast
+import { toast } from 'react-toastify';
+
 // ==============================|| CLUSTER TABLE - HEADER CELL ||============================== //
 
 const headCells = [
@@ -113,19 +116,25 @@ ClusterStatus.propTypes = {
 // ==============================|| CLUSTER TABLE ||============================== //
 
 export default function ClusterTable() {
+  const [initialRender, setInitialRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [clusters, setClusters] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
 
-    ClusterService.getClusters().then((response) => {
-      if (response) {
-        setClusters(response?.data);
-        setIsLoading(false);
-      }
-    });
-  }, []);
+    if (!initialRender) {
+      ClusterService.getClusters().then((response) => {
+        if (response) {
+          setClusters(response?.data);
+          setIsLoading(false);
+          toast.info('Latest cluster data loaded');
+        }
+      });
+    }
+
+    setInitialRender(false);
+  }, [initialRender]);
 
   return (
     <Box>

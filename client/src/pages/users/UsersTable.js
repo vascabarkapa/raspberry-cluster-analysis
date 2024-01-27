@@ -15,6 +15,9 @@ import UsersDeleteModal from './UsersDeleteModal';
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
 
+// toast
+import { toast } from 'react-toastify';
+
 // ==============================|| USERS TABLE - HEADER CELL ||============================== //
 
 const headCells = [
@@ -69,6 +72,7 @@ function UsersTableHead() {
 // ==============================|| USERS TABLE ||============================== //
 
 export default function UsersTable() {
+  const [initialRender, setInitialRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
@@ -77,13 +81,18 @@ export default function UsersTable() {
   useEffect(() => {
     setIsLoading(true);
 
-    UserService.getUsers().then((response) => {
-      if (response) {
-        setUsers(response?.data);
-        setIsLoading(false);
-      }
-    });
-  }, []);
+    if (!initialRender) {
+      UserService.getUsers().then((response) => {
+        if (response) {
+          setUsers(response?.data);
+          setIsLoading(false);
+          toast.info('Latest user data loaded');
+        }
+      });
+    }
+
+    setInitialRender(false);
+  }, [initialRender]);
 
   const handleOpenUsersFormModal = () => {
     setOpenUsersFormModal(true);

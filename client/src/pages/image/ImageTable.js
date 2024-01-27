@@ -9,6 +9,9 @@ import ImageService from '../../shared/services/image-service';
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
 
+// toast
+import { toast } from 'react-toastify';
+
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
 const headCells = [
@@ -69,19 +72,25 @@ function ImageTableHead() {
 // ==============================|| IMAGE TABLE ||============================== //
 
 export default function ImageTable() {
+  const [initialRender, setInitialRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
 
-    ImageService.getImages().then((response) => {
-      if (response) {
-        setImages(response?.data);
-        setIsLoading(false);
-      }
-    });
-  }, []);
+    if (!initialRender) {
+      ImageService.getImages().then((response) => {
+        if (response) {
+          setImages(response?.data);
+          setIsLoading(false);
+          toast.info('Latest image data loaded');
+        }
+      });
+    }
+
+    setInitialRender(false);
+  }, [initialRender]);
 
   return (
     <Box>

@@ -9,14 +9,24 @@ import IncomeAreaChart from './IncomeAreaChart';
 import MonthlyBarChart from './MonthlyBarChart';
 import MainCard from 'components/MainCard';
 
+// toast
+import { toast } from 'react-toastify';
+
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
+  const [initialRender, setInitialRender] = useState(true);
   const [slot, setSlot] = useState('week');
 
   useEffect(() => {
     updatePageTitle('Cloudberry');
-  }, []);
+
+    if (!initialRender) {
+      toast.info('Loaded latest data');
+    }
+
+    setInitialRender(false);
+  }, [slot, initialRender]);
 
   return (
     <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
