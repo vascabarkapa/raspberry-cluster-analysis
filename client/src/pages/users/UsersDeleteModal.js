@@ -22,13 +22,18 @@ const UsersDeleteModal = ({ open, setOpen, user, setTrigger }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    UserService.deleteUser(user?._id).then((response) => {
-      if (response) {
-        toast.info(`User "${response?.data?.username}" is deleted`);
-        setOpen(false);
-        setTrigger(true);
+    UserService.deleteUser(user?._id).then(
+      (response) => {
+        if (response) {
+          toast.info(`User "${response?.data?.username}" is deleted`);
+          setOpen(false);
+          setTrigger(true);
+        }
+      },
+      (error) => {
+        console.error(error);
       }
-    });
+    );
   };
 
   return (

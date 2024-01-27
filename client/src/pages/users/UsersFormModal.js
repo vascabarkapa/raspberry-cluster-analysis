@@ -47,27 +47,37 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
           onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
             try {
               if (!user) {
-                UserService.createUser(values).then((response) => {
-                  if (response) {
-                    setStatus({ success: false });
-                    setSubmitting(false);
-                    setOpen(false);
-                    setTrigger(true);
-                    toast.success(`User "${response?.data?.username}" created`);
+                UserService.createUser(values).then(
+                  (response) => {
+                    if (response) {
+                      setStatus({ success: false });
+                      setSubmitting(false);
+                      setOpen(false);
+                      setTrigger(true);
+                      toast.success(`User "${response?.data?.username}" created`);
+                    }
+                  },
+                  (error) => {
+                    console.error(error);
                   }
-                });
+                );
               } else {
                 values.password = user.password;
 
-                UserService.updateUser(user?._id, values).then((response) => {
-                  if (response) {
-                    setStatus({ success: false });
-                    setSubmitting(false);
-                    setOpen(false);
-                    setTrigger(true);
-                    toast.success(`User "${response?.data?.username}" updated`);
+                UserService.updateUser(user?._id, values).then(
+                  (response) => {
+                    if (response) {
+                      setStatus({ success: false });
+                      setSubmitting(false);
+                      setOpen(false);
+                      setTrigger(true);
+                      toast.success(`User "${response?.data?.username}" updated`);
+                    }
+                  },
+                  (error) => {
+                    console.error(error);
                   }
-                });
+                );
               }
             } catch (err) {
               setStatus({ success: false });

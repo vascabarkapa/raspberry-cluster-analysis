@@ -1,10 +1,16 @@
 import React from 'react';
-import { Button, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+
 import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { Button, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
+
+// service
 import AuthService from '../../../shared/services/auth-service';
+
+// toast
+import { toast } from 'react-toastify';
 
 const AuthLogin = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -53,6 +59,8 @@ const AuthLogin = () => {
               }
             }
           } catch (err) {
+            toast.error(err?.response?.data?.message);
+
             setStatus({ success: false });
             setErrors({ submit: err.message });
             setSubmitting(false);
@@ -118,12 +126,6 @@ const AuthLogin = () => {
                   )}
                 </Stack>
               </Grid>
-
-              {errors.submit && (
-                <Grid item xs={12}>
-                  <FormHelperText error>{errors.submit}</FormHelperText>
-                </Grid>
-              )}
               <Grid item xs={12} sx={{ mt: 5 }}>
                 <AnimateButton>
                   <Button

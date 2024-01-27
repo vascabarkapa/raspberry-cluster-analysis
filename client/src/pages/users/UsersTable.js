@@ -83,13 +83,19 @@ export default function UsersTable() {
     setIsLoading(true);
 
     if (!initialRender) {
-      UserService.getUsers().then((response) => {
-        if (response) {
-          setUsers(response?.data);
+      UserService.getUsers().then(
+        (response) => {
+          if (response) {
+            setUsers(response?.data);
+            setIsLoading(false);
+            setTrigger(false);
+          }
+        },
+        (error) => {
+          console.error(error);
           setIsLoading(false);
-          setTrigger(false);
         }
-      });
+      );
     }
 
     setInitialRender(false);

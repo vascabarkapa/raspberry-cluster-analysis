@@ -80,13 +80,19 @@ export default function ImageTable() {
     setIsLoading(true);
 
     if (!initialRender) {
-      ImageService.getImages().then((response) => {
-        if (response) {
-          setImages(response?.data);
+      ImageService.getImages().then(
+        (response) => {
+          if (response) {
+            setImages(response?.data);
+            setIsLoading(false);
+            toast.info('Latest image data loaded');
+          }
+        },
+        (error) => {
+          console.error(error);
           setIsLoading(false);
-          toast.info('Latest image data loaded');
         }
-      });
+      );
     }
 
     setInitialRender(false);

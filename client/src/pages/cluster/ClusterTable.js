@@ -124,13 +124,19 @@ export default function ClusterTable() {
     setIsLoading(true);
 
     if (!initialRender) {
-      ClusterService.getClusters().then((response) => {
-        if (response) {
-          setClusters(response?.data);
+      ClusterService.getClusters().then(
+        (response) => {
+          if (response) {
+            setClusters(response?.data);
+            setIsLoading(false);
+            toast.info('Latest cluster data loaded');
+          }
+        },
+        (error) => {
+          console.error(error);
           setIsLoading(false);
-          toast.info('Latest cluster data loaded');
         }
-      });
+      );
     }
 
     setInitialRender(false);
