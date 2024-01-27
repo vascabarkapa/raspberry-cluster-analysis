@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, Typography } from '@mui/material';
 
 // assets
+import { isAuthenticated } from '../../utils/UserAuthenticated';
 import cloudberry_logo from 'assets/images/logo/cloudberry_logo.png';
 import AnimateButton from '../../components/@extended/AnimateButton';
 
@@ -33,7 +34,7 @@ const ErrorPage = ({ code, message }) => {
         <Box mt={2} display="flex" justifyContent="center" alignItems="center">
           <AnimateButton>
             <Button fullWidth size="large" variant="contained" color="primary" onClick={handleBackToDashboard}>
-              Back to Dashboard
+              {isAuthenticated() ? 'Back to Dashboard' : 'Return Home'}
             </Button>
           </AnimateButton>
         </Box>
