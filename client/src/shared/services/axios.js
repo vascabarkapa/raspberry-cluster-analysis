@@ -32,14 +32,30 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    const ACCESS_TOKEN = localStorage.getItem('access_token');
+    // const ACCESS_TOKEN = localStorage.getItem('access_token');
 
-    if (error?.response?.status === 401 && ACCESS_TOKEN) {
-      window.location.href = 'sign-out';
+    if (error?.response?.status === 400) {
+      window.location.href = '400';
+    }
+
+    if (error?.response?.status === 401) {
+      window.location.href = '401';
     }
 
     if (error?.response?.status === 404) {
       window.location.href = '404';
+    }
+
+    if (error?.response?.status === 500) {
+      window.location.href = '500';
+    }
+
+    if (error?.response?.status === 502) {
+      window.location.href = '502';
+    }
+
+    if (error?.response?.status === 504) {
+      window.location.href = '504';
     }
 
     return Promise.reject(error);
