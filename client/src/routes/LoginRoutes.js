@@ -23,7 +23,7 @@ const LoginRoutes = {
     },
     {
       path: '*',
-      element: <ErrorPage />
+      element: <ErrorPage code={404} message={'Not Found'} s/>
     }
   ]
 };
