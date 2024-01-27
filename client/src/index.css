@@ -1,0 +1,11 @@
+.loading-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.divider-height {
+    height: 15px;
+}

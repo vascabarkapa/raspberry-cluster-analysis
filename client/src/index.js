@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // scroll bar
 import 'simplebar/src/simplebar.css';
+import './index.css';
 
 // third-party
 import { Provider as ReduxProvider } from 'react-redux';
@@ -43,9 +44,9 @@ const MainApp = () => {
         <BrowserRouter>
           {loading ? (
             // Loading screen
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <div className="loading-center">
               <CloudberryFullLogo width={250} />
-              <div style={{ height: '15px' }}></div>
+              <div className="divider-height"></div>
               <Dots />
             </div>
           ) : (
