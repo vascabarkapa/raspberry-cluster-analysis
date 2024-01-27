@@ -42,7 +42,7 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
             first_name: Yup.string().max(255).required('First Name is required'),
             last_name: Yup.string().max(255).required('Last Name is required'),
             username: Yup.string().max(255).required('Username is required'),
-            email: Yup.string().max(255).required('Email is required'),
+            email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
             role: Yup.string().max(255).required('Role is required')
           })}
           onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
