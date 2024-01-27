@@ -22,6 +22,10 @@ import reportWebVitals from './reportWebVitals';
 import CloudberryFullLogo from 'components/loading/FullLogo';
 import Dots from 'components/loading/Dots';
 
+// toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
@@ -51,7 +55,10 @@ const MainApp = () => {
             </div>
           ) : (
             // Main application
-            <App />
+            <>
+              <ToastContainer />
+              <App />
+            </>
           )}
         </BrowserRouter>
       </ReduxProvider>
