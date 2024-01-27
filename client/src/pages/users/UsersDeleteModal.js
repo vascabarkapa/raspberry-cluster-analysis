@@ -8,14 +8,25 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import DialogContent from '@mui/material/DialogContent';
 import { Typography } from '@mui/material';
+import UserService from '../../shared/services/user-service';
 
-const UsersDeleteModal = ({ open, setOpen }) => {
+import { toast } from 'react-toastify';
+
+const UsersDeleteModal = ({ open, setOpen, user, setTrigger }) => {
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    UserService.deleteUser(user?._id).then((response) => {
+      if (response) {
+        toast.info(`User "${response?.data?.username}" is deleted`);
+        setOpen(false);
+        setTrigger(true);
+      }
+    });
   };
 
   return (
@@ -42,7 +53,8 @@ const UsersDeleteModal = ({ open, setOpen }) => {
 
 UsersDeleteModal.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.func
+  setOpen: PropTypes.func,
+  user: PropTypes.object
 };
 
 export default UsersDeleteModal;

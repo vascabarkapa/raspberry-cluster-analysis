@@ -15,9 +15,6 @@ import UsersDeleteModal from './UsersDeleteModal';
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
 
-// toast
-import { toast } from 'react-toastify';
-
 // ==============================|| USERS TABLE - HEADER CELL ||============================== //
 
 const headCells = [
@@ -73,8 +70,11 @@ function UsersTableHead() {
 
 export default function UsersTable() {
   const [initialRender, setInitialRender] = useState(true);
+  const [trigger, setTrigger] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  // const [userToEdit, setUserToEdit] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null);
   const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
   const [openUsersDeleteModal, setOpenDeleteFormModal] = useState(false);
 
@@ -86,21 +86,21 @@ export default function UsersTable() {
         if (response) {
           setUsers(response?.data);
           setIsLoading(false);
-          toast.info('Latest user data loaded');
         }
       });
     }
 
     setInitialRender(false);
-  }, [initialRender]);
+  }, [initialRender, trigger]);
 
   const handleOpenUsersFormModal = () => {
     setOpenUsersFormModal(true);
   };
 
-  const handleOpenUsersDeleteModal = () => {
+  function handleOpenUsersDeleteModal(user) {
+    setUserToDelete(user);
     setOpenDeleteFormModal(true);
-  };
+  }
 
   return (
     <Box>
@@ -147,7 +147,7 @@ export default function UsersTable() {
                           </Button>
                         </Tooltip>
                         <Tooltip title="Delete User">
-                          <Button variant="contained" color="error" onClick={handleOpenUsersDeleteModal}>
+                          <Button variant="contained" color="error" onClick={() => handleOpenUsersDeleteModal(user)}>
                             <DeleteOutlined />
                           </Button>
                         </Tooltip>
@@ -163,7 +163,9 @@ export default function UsersTable() {
         </Table>
       </TableContainer>
       {openUsersFormModal && <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} />}
-      {openUsersDeleteModal && <UsersDeleteModal open={openUsersDeleteModal} setOpen={setOpenDeleteFormModal} />}
+      {openUsersDeleteModal &&
+        <UsersDeleteModal open={openUsersDeleteModal} setOpen={setOpenDeleteFormModal} user={userToDelete}
+                          setTrigger={setTrigger} />}
     </Box>
   );
 }
