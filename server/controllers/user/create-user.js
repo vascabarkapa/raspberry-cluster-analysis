@@ -11,7 +11,7 @@ export default asyncHandler(async (req, res) => {
             throw new Error("User is already registered with that email address");
         }
 
-        const password = await bcrypt.hash(req.body.password, 10);
+        const password = await bcrypt.hash(req.body.username, 10);
         req.body.password = password;
 
         const newUser = await User.create(req.body);
