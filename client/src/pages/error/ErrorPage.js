@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 // material-ui
@@ -8,9 +9,9 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import cloudberry_logo from 'assets/images/logo/cloudberry_logo.png';
 import AnimateButton from '../../components/@extended/AnimateButton';
 
-// ==============================|| USERS PAGE ||============================== //
+// ==============================|| ERROR PAGE ||============================== //
 
-const ErrorPage = () => {
+const ErrorPage = ({ code, message }) => {
   const navigate = useNavigate();
 
   const handleBackToDashboard = () => {
@@ -22,11 +23,11 @@ const ErrorPage = () => {
       <Grid item xs={12} align="center">
         <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
           <Typography variant="h1" sx={{ mr: 1 }}>
-            404
+            {code}
           </Typography>
           <img src={cloudberry_logo} alt="cloudberry_logo" width={50} />
           <Typography variant="h1" sx={{ ml: 1 }}>
-            Not Found
+            {message}
           </Typography>
         </Box>
         <Box mt={2} display="flex" justifyContent="center" alignItems="center">
@@ -39,6 +40,11 @@ const ErrorPage = () => {
       </Grid>
     </Grid>
   );
+};
+
+ErrorPage.propTypes = {
+  code: PropTypes.number,
+  message: PropTypes.string
 };
 
 export default ErrorPage;

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 
 import TextField from '@mui/material/TextField';
@@ -7,10 +9,9 @@ import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-
 import { FormHelperText, Grid, Typography } from '@mui/material';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+
+// services
 import UserService from '../../shared/services/user-service';
 
 // toast
