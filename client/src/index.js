@@ -56,7 +56,18 @@ const MainApp = () => {
           ) : (
             // Main application
             <>
-              <ToastContainer />
+              <ToastContainer
+                position="top-center"
+                autoClose={1500}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+              />
               <App />
             </>
           )}
