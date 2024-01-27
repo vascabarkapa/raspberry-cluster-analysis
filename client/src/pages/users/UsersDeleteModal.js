@@ -5,11 +5,13 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import DialogContent from '@mui/material/DialogContent';
 import { Typography } from '@mui/material';
+
+// services
 import UserService from '../../shared/services/user-service';
 
+// toast
 import { toast } from 'react-toastify';
 
 const UsersDeleteModal = ({ open, setOpen, user, setTrigger }) => {
@@ -54,7 +56,8 @@ const UsersDeleteModal = ({ open, setOpen, user, setTrigger }) => {
 UsersDeleteModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
-  user: PropTypes.object
+  user: PropTypes.object,
+  setTrigger: PropTypes.func
 };
 
 export default UsersDeleteModal;

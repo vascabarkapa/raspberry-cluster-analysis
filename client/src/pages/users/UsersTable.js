@@ -1,18 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import {
-  Box,
-  Button,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Tooltip, Typography
-} from '@mui/material';
+import { Box, Button, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material';
 
 // assets
 import { EditOutlined, DeleteOutlined, UserAddOutlined } from '@ant-design/icons';
@@ -177,14 +166,17 @@ export default function UsersTable() {
                           <TableCell align="left">{user.role}</TableCell>
                           <TableCell align="right">
                             <Tooltip title="Edit User">
-                              <Button variant="contained" color="primary" sx={{ mr: 2 }}
-                                      onClick={() => handleOpenUsersFormModal('edit', user)}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                sx={{ mr: 2 }}
+                                onClick={() => handleOpenUsersFormModal('edit', user)}
+                              >
                                 <EditOutlined />
                               </Button>
                             </Tooltip>
                             <Tooltip title="Delete User">
-                              <Button variant="contained" color="error"
-                                      onClick={() => handleOpenUsersDeleteModal(user)}>
+                              <Button variant="contained" color="error" onClick={() => handleOpenUsersDeleteModal(user)}>
                                 <DeleteOutlined />
                               </Button>
                             </Tooltip>
@@ -199,12 +191,12 @@ export default function UsersTable() {
               )}
             </Table>
           </TableContainer>
-          {openUsersFormModal &&
-            <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} user={userToForm}
-                            setTrigger={setTrigger} />}
-          {openUsersDeleteModal &&
-            <UsersDeleteModal open={openUsersDeleteModal} setOpen={setOpenDeleteFormModal} user={userToDelete}
-                              setTrigger={setTrigger} />}
+          {openUsersFormModal && (
+            <UsersFormModal open={openUsersFormModal} setOpen={setOpenUsersFormModal} user={userToForm} setTrigger={setTrigger} />
+          )}
+          {openUsersDeleteModal && (
+            <UsersDeleteModal open={openUsersDeleteModal} setOpen={setOpenDeleteFormModal} user={userToDelete} setTrigger={setTrigger} />
+          )}
         </Box>
       </MainCard>
     </>

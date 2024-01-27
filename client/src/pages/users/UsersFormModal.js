@@ -25,9 +25,7 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>
-        <Typography variant="h3">
-          {!user ? 'Add new User' : 'Edit User'}
-        </Typography>
+        <Typography variant="h3">{!user ? 'Add new User' : 'Edit User'}</Typography>
       </DialogTitle>
       <DialogContent>
         <Formik
@@ -186,13 +184,7 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
                   <Button type="button" variant="outlined" color="error" sx={{ mr: 1 }} onClick={handleClose}>
                     Cancel
                   </Button>
-                  <Button
-                    disableElevation
-                    disabled={isSubmitting}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button disableElevation disabled={isSubmitting} type="submit" variant="contained" color="primary">
                     {!user ? 'Add' : 'Edit'}
                   </Button>
                 </Box>
@@ -207,7 +199,9 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
 
 UsersFormModal.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.func
+  setOpen: PropTypes.func,
+  user: PropTypes.object,
+  setTrigger: PropTypes.func
 };
 
 export default UsersFormModal;

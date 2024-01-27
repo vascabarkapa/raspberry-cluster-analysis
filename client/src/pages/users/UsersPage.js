@@ -14,7 +14,6 @@ const UsersPage = () => {
     updatePageTitle('Users - Cloudberry');
   }, []);
 
-
   return (
     <>
       <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
