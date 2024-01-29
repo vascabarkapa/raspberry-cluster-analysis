@@ -2,8 +2,8 @@ import { get, post, put, remove } from './api-client';
 
 const ENDPOINT = '/user';
 
-function getUsers() {
-  return get(ENDPOINT);
+function getUsers(params = '') {
+  return get(ENDPOINT, params);
 }
 
 function getUserById(id) {

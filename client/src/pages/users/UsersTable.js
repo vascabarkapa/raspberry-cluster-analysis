@@ -10,6 +10,7 @@ import { EditOutlined, DeleteOutlined, UserAddOutlined } from '@ant-design/icons
 import UserService from '../../shared/services/user-service';
 
 // components
+import TablePagination from '../../components/loading/TablePagination';
 import UsersFormModal from './UsersFormModal';
 import UsersDeleteModal from './UsersDeleteModal';
 import TableLoading from '../../components/loading/TableLoading';
@@ -74,6 +75,11 @@ export default function UsersTable() {
   const [trigger, setTrigger] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const [pageSize, setPageSize] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
+  const [totalUsers, setTotalUsers] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [userToForm, setUserToForm] = useState(null);
   const [userToDelete, setUserToDelete] = useState(null);
   const [openUsersFormModal, setOpenUsersFormModal] = useState(false);
@@ -86,7 +92,10 @@ export default function UsersTable() {
       UserService.getUsers().then(
         (response) => {
           if (response) {
-            setUsers(response?.data);
+            setUsers(response?.data?.users);
+            setPageSize(response?.data?.per_page);
+            setTotalPages(response?.data?.total_pages);
+            setTotalUsers(response?.data?.total_items);
             setIsLoading(false);
           }
         },
@@ -114,6 +123,27 @@ export default function UsersTable() {
     setUserToDelete(user);
     setOpenDeleteFormModal(true);
   }
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (currentPage !== value) {
+      setIsLoading(true);
+
+      UserService.getUsers({ page: value }).then(
+        (response) => {
+          if (response) {
+            setUsers(response?.data?.users);
+            setTotalPages(response?.data?.total_pages);
+            setCurrentPage(value);
+            setIsLoading(false);
+          }
+        },
+        (error) => {
+          console.error(error);
+          setIsLoading(false);
+        }
+      );
+    }
+  };
 
   return (
     <>
@@ -189,9 +219,19 @@ export default function UsersTable() {
                       );
                     })
                   ) : (
-                    <TableEmpty colSpan={8} text={'No Image information'} />
+                    <TableEmpty colSpan={8} text={'No User information'} />
                   )}
                 </TableBody>
+              )}
+              {totalUsers && totalUsers > 0 && (
+                <TablePagination
+                  colSpan={6}
+                  totalItems={totalUsers}
+                  pageSize={pageSize}
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                />
               )}
             </Table>
           </TableContainer>
