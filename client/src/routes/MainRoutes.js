@@ -8,6 +8,7 @@ import UsersPage from '../pages/users/UsersPage';
 import ImagePage from '../pages/image/ImagePage';
 import ClusterPage from '../pages/cluster/ClusterPage';
 import ApiDocumentationPage from '../pages/api-documentation/ApiDocumentationPage';
+import ErrorPage from '../pages/error/ErrorPage';
 
 import { isAuthenticated } from '../utils/UserAuthenticated';
 
@@ -39,6 +40,10 @@ const MainRoutes = {
     {
       path: 'api-documentation',
       element: <ApiDocumentationPage />
+    },
+    {
+      path: '*',
+      element: <ErrorPage code={404} message={'Not Found'} />
     }
   ]
 };

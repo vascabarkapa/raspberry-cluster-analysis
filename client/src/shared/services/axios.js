@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiUrl } from '../config';
+import { isEmpty } from 'lodash';
 
 const axiosInstance = axios.create({
   baseURL: apiUrl
@@ -34,15 +35,17 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     const statusCode = error?.response?.status;
-    const ACCESS_TOKEN = localStorage.getItem('token');
+    const ACCESS_TOKEN = localStorage.getItem('access_token');
 
     switch (statusCode) {
       case 400:
         window.location.replace('400');
         break;
 
-      case 401 && !ACCESS_TOKEN:
-        window.location.replace('401');
+      case 401:
+        if (!isEmpty(ACCESS_TOKEN)) {
+          window.location.replace('/401');
+        }
         break;
 
       case 404:

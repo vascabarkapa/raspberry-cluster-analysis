@@ -13,10 +13,17 @@ import AnimateButton from '../../components/@extended/AnimateButton';
 // ==============================|| ERROR PAGE ||============================== //
 
 const ErrorPage = ({ code, message }) => {
+  let UNAUTHORIZED = 401;
   const navigate = useNavigate();
 
   const handleBackToDashboard = () => {
-    navigate('/');
+    if (code === UNAUTHORIZED) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('current_user');
+      window.location.href = '/login';
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -34,7 +41,7 @@ const ErrorPage = ({ code, message }) => {
         <Box mt={2} display="flex" justifyContent="center" alignItems="center">
           <AnimateButton>
             <Button fullWidth size="large" variant="contained" color="primary" onClick={handleBackToDashboard}>
-              {isAuthenticated() ? 'Back to Dashboard' : 'Return Home'}
+              {code === UNAUTHORIZED ? 'Go to Login' : isAuthenticated() ? 'Back to Dashboard' : 'Return Home'}
             </Button>
           </AnimateButton>
         </Box>

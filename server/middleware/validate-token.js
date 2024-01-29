@@ -8,16 +8,16 @@ export default asyncHandler(async (req, res, next) => {
 
   if (!authHeader || !authHeader.toLowerCase().startsWith("bearer ")) {
     res.status(401);
-    throw new Error("Token is missing");
+    throw new Error("Access token is missing");
   }
 
-  const token = authHeader.split(" ")[1];
+  const accessToken = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, accessTokenSecret);
+    const decoded = jwt.verify(accessToken, accessTokenSecret);
 
     const exists = await User.exists({_id: decoded.user.id})
-      .catch((err) => {
+      .catch(() => {
         return res.status(500).json("Internal Server Error");
       });
 

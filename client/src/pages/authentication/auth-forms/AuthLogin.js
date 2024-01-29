@@ -42,10 +42,10 @@ const AuthLogin = () => {
             setStatus({ success: false });
             setSubmitting(false);
 
-            const tokenResponse = await AuthService.login(values.email, values.password);
+            const accessTokenResponse = await AuthService.login(values.email, values.password);
 
-            if (tokenResponse) {
-              const accessToken = tokenResponse?.data?.accessToken;
+            if (accessTokenResponse) {
+              const accessToken = accessTokenResponse?.data?.accessToken;
               localStorage.setItem('access_token', accessToken);
 
               const userResponse = await AuthService.getCurrentUser();
