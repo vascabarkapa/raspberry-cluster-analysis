@@ -1,14 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './../../App.css';
-import { Pagination, TableCell, TableFooter, TableRow } from '@mui/material';
+import { Pagination, TableCell, TableFooter, TableRow, Grid } from '@mui/material';
 
-const TablePagination = ({ colSpan, totalPages, currentPage, handlePageChange }) => {
+const TablePagination = ({ colSpan, totalItems, pageSize, totalPages, currentPage, handlePageChange }) => {
   return (
     <TableFooter>
       <TableRow>
-        <TableCell align="right" colSpan={colSpan}>
-          <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+        <TableCell colSpan={colSpan}>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              Show {pageSize * (currentPage - 1) + 1} - {Math.min(pageSize * currentPage, totalItems)} of {totalItems}
+            </Grid>
+            <Grid item>
+              <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+            </Grid>
+          </Grid>
         </TableCell>
       </TableRow>
     </TableFooter>
@@ -17,6 +24,8 @@ const TablePagination = ({ colSpan, totalPages, currentPage, handlePageChange })
 
 TablePagination.propTypes = {
   colSpan: PropTypes.number,
+  totalItems: PropTypes.number,
+  pageSize: PropTypes.number,
   totalPages: PropTypes.number,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func
