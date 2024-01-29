@@ -28,14 +28,23 @@ To run the Cloudberry project locally, follow these steps:
 1. Clone the repository:
     ```bash
     git clone https://github.com/vascabarkapa/raspberry-cluster-analysis.git
-2. Set up the environment variables:
-    ```bash
-    PORT="Specifies the port on which your application will listen for HTTP requests"
-    ENVIRONMENT="Indicates the environment in which the application is running"
-    CONNECTION_STRING="Provide the connection string for connecting to your MongoDB database"
-    ACCESS_TOKEN_SECRET="Secret key used for signing and verifying JWT (JSON Web Token) tokens"
-    API_URL="Specifies the URL of your API service, e.g. http://localhost:5001/api"
-    FRONT_URL="URL for the frontend application, e.g. http://localhost:3000"
+2. Set up the environment variables for backend and frontend:
+   ```bash
+   server/.env
+   
+   PORT="Specifies the port on which your application will listen for HTTP requests"
+   ENVIRONMENT="Indicates the environment in which the application is running"
+   CONNECTION_STRING="Provide the connection string for connecting to your MongoDB database"
+   ACCESS_TOKEN_SECRET="Secret key used for signing and verifying JWT (JSON Web Token) tokens"
+   API_URL="Specifies the URL of your API service, e.g. http://localhost:5001/api"
+   FRONT_URL="URL for the frontend application, e.g. http://localhost:3000"
+   ```
+   ```bash
+   client/.env
+   
+   REACT_APP_API_URL = "Specifies the URL of your API service, e.g. http://localhost:5001/api"
+   GENERATE_SOURCEMAP = "Controls whether source map files are generated during the build, and it is typically turned off in production to reduce output file size"
+   ```
 3. Navigate to project directory:
     ```bash
     cd raspberry-cluster-analysis
