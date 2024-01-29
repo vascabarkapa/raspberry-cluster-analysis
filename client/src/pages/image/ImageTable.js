@@ -8,10 +8,11 @@ import ImageService from '../../shared/services/image-service';
 
 // project import
 import TableLoading from '../../components/loading/TableLoading';
-
 import TableEmpty from '../../components/loading/TableEmpty';
+
 // toast
 import { toast } from 'react-toastify';
+import TablePagination from '../../components/loading/TablePagination';
 
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
@@ -76,6 +77,10 @@ export default function ImageTable() {
   const [initialRender, setInitialRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
+  const [pageSize, setPageSize] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
+  const [totalImages, setTotalImages] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setIsLoading(true);
@@ -84,7 +89,10 @@ export default function ImageTable() {
       ImageService.getImages().then(
         (response) => {
           if (response) {
-            setImages(response?.data);
+            setImages(response?.data?.images);
+            setPageSize(response?.data?.per_page);
+            setTotalPages(response?.data?.total_pages);
+            setTotalImages(response?.data?.total_items);
             setIsLoading(false);
             toast.info('Latest image data loaded');
           }
@@ -98,6 +106,28 @@ export default function ImageTable() {
 
     setInitialRender(false);
   }, [initialRender]);
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (currentPage !== value) {
+      setIsLoading(true);
+
+      ImageService.getImages({ page: value }).then(
+        (response) => {
+          if (response) {
+            setImages(response?.data?.images);
+            setTotalPages(response?.data?.total_pages);
+            setCurrentPage(value);
+            setIsLoading(false);
+            toast.info('Latest image data loaded');
+          }
+        },
+        (error) => {
+          console.error(error);
+          setIsLoading(false);
+        }
+      );
+    }
+  };
 
   return (
     <Box>
@@ -148,6 +178,14 @@ export default function ImageTable() {
               )}
             </TableBody>
           )}
+          <TablePagination
+            colSpan={6}
+            totalItems={totalImages}
+            pageSize={pageSize}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handlePageChange={handlePageChange}
+          />
         </Table>
       </TableContainer>
     </Box>
