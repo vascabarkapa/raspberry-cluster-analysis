@@ -27,7 +27,7 @@ const ErrorPage = ({ code, message }) => {
   };
 
   return (
-    <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+    <Grid container justifyContent="center" alignItems="center" style={{ height: '80vh' }}>
       <Grid item xs={12} align="center">
         <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
           <Typography variant="h1" sx={{ mr: 1 }}>
