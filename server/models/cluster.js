@@ -6,15 +6,15 @@ const clusterSchema = new Schema({
       type: Number,
       required: [true, "Cluster Age is required"]
     },
-    numberOfNodes: {
+    number_of_nodes: {
       type: Number,
       default: null
     },
-    minPods: {
+    min_pods: {
       type: Number,
       required: [true, "Minimal number of Pods is required"]
     },
-    maxPods: {
+    max_pods: {
       type: Number,
       required: [true, "Maximal number of Pods is required"]
     },
@@ -26,7 +26,7 @@ const clusterSchema = new Schema({
       type: Number,
       required: [true, "Cluster Load is required"]
     },
-    loadThreshold: {
+    load_threshold: {
       type: Number,
       required: [true, "Threshold od Load is required"]
     },

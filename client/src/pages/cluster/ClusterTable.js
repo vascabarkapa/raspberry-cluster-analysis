@@ -32,19 +32,19 @@ const headCells = [
     label: 'Age'
   },
   {
-    id: 'numberOfNodes',
+    id: 'number_of_nodes',
     align: 'left',
     disablePadding: false,
     label: 'Number of Nodes'
   },
   {
-    id: 'minPods',
+    id: 'min_pods',
     align: 'left',
     disablePadding: false,
     label: 'Min. Pods'
   },
   {
-    id: 'maxPods',
+    id: 'max_pods',
     align: 'left',
     disablePadding: false,
     label: 'Max. Pods'
@@ -179,12 +179,12 @@ export default function ClusterTable() {
                         {cluster?._id}
                       </TableCell>
                       <TableCell align="left">{cluster?.age} min</TableCell>
-                      <TableCell align="left">{cluster?.numberOfNodes}</TableCell>
-                      <TableCell align="left">{cluster?.minPods}</TableCell>
-                      <TableCell align="left">{cluster?.maxPods}</TableCell>
+                      <TableCell align="left">{cluster?.number_of_nodes}</TableCell>
+                      <TableCell align="left">{cluster?.min_pods}</TableCell>
+                      <TableCell align="left">{cluster?.max_pods}</TableCell>
                       <TableCell align="left">{cluster?.replicas}</TableCell>
                       <TableCell align="left">
-                        <ClusterStatus load={cluster?.load} loadThreshold={cluster?.loadThreshold} />
+                        <ClusterStatus load={cluster?.load} loadThreshold={cluster?.load_threshold} />
                       </TableCell>
                       <TableCell align="left">{DateTimeHelper.convertToLocalFormatWithSeconds(cluster?.createdAt)}</TableCell>
                     </TableRow>
