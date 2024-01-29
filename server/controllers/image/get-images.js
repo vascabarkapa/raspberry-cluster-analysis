@@ -4,7 +4,7 @@ import { Image } from './../../models/index.js';
 export default asyncHandler(async (req, res) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const perPage = 10;
+    const perPage = parseInt(req.query.pageSize) || 10;
 
     const skip = (page - 1) * perPage;
 
@@ -18,8 +18,10 @@ export default asyncHandler(async (req, res) => {
 
     res.json({
       images: images,
+      current_page: page,
+      per_page: perPage,
       total_pages: totalPages,
-      current_page: page
+      total_items: totalImages
     });
   } catch (error) {
     console.error('Error retrieving images from the database:', error);
