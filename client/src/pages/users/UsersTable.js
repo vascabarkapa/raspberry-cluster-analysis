@@ -143,7 +143,7 @@ export default function UsersTable() {
             }}
           >
             <Table
-              aria-labelledby="tableTitle"
+              aria-labelledby="usersTable"
               sx={{
                 '& .MuiTableCell-root:first-of-type': {
                   pl: 2
