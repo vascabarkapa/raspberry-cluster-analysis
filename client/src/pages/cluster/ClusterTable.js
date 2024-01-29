@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-// services
+// helpers and services
+import DateTimeHelper from '../../shared/helpers/DateTimeHelper';
 import ClusterService from '../../shared/services/cluster-service';
 
 // material-ui
@@ -155,7 +156,7 @@ export default function ClusterTable() {
         }}
       >
         <Table
-          aria-labelledby="tableTitle"
+          aria-labelledby="clusterTable"
           sx={{
             '& .MuiTableCell-root:first-of-type': {
               pl: 2
@@ -173,19 +174,19 @@ export default function ClusterTable() {
               {clusters && clusters?.length > 0 ? (
                 clusters.map((cluster) => {
                   return (
-                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={cluster._id}>
+                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={cluster?._id}>
                       <TableCell component="th" scope="row" align="left">
-                        {cluster._id}
+                        {cluster?._id}
                       </TableCell>
-                      <TableCell align="left">{cluster.age} min</TableCell>
-                      <TableCell align="left">{cluster.numberOfNodes}</TableCell>
-                      <TableCell align="left">{cluster.minPods}</TableCell>
-                      <TableCell align="left">{cluster.maxPods}</TableCell>
-                      <TableCell align="left">{cluster.replicas}</TableCell>
+                      <TableCell align="left">{cluster?.age} min</TableCell>
+                      <TableCell align="left">{cluster?.numberOfNodes}</TableCell>
+                      <TableCell align="left">{cluster?.minPods}</TableCell>
+                      <TableCell align="left">{cluster?.maxPods}</TableCell>
+                      <TableCell align="left">{cluster?.replicas}</TableCell>
                       <TableCell align="left">
-                        <ClusterStatus load={cluster.load} loadThreshold={cluster.loadThreshold} />
+                        <ClusterStatus load={cluster?.load} loadThreshold={cluster?.loadThreshold} />
                       </TableCell>
-                      <TableCell align="left">{cluster.createdAt}</TableCell>
+                      <TableCell align="left">{DateTimeHelper.convertToLocalFormatWithSeconds(cluster?.createdAt)}</TableCell>
                     </TableRow>
                   );
                 })

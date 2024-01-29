@@ -10,15 +10,15 @@ const imageSchema = new Schema({
       type: String,
       required: [true, "Image Name is required"]
     },
-    numberOfFaces: {
+    number_of_faces: {
       type: Number,
       required: [true, "Number of Faces is required"]
     },
-    processingTime: {
+    processing_time: {
       type: Number,
       required: [true, "Processing Time is required"]
     },
-    takenAt: {
+    taken_at: {
       type: Date,
       required: [true, "Taken At date and time are required"]
     }

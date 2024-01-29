@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 // material-ui
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-// services
+// helpers and services
+import DateTimeHelper from '../../shared/helpers/DateTimeHelper';
 import ImageService from '../../shared/services/image-service';
 
 // project import
 import TableLoading from '../../components/loading/TableLoading';
-import TableEmpty from '../../components/loading/TableEmpty';
 
+import TableEmpty from '../../components/loading/TableEmpty';
 // toast
 import { toast } from 'react-toastify';
 
@@ -34,19 +35,19 @@ const headCells = [
     label: 'Image'
   },
   {
-    id: 'numberOfFaces',
+    id: 'number_of_faces',
     align: 'left',
     disablePadding: false,
     label: 'Number of Faces'
   },
   {
-    id: 'processingTime',
+    id: 'processing_time',
     align: 'left',
     disablePadding: false,
     label: 'FR Processing Time'
   },
   {
-    id: 'takenAt',
+    id: 'taken_at',
     align: 'left',
     disablePadding: false,
     label: 'Timestamp'
@@ -111,7 +112,8 @@ export default function ImageTable() {
         }}
       >
         <Table
-          aria-labelledby="tableTitle"
+          size="small"
+          aria-labelledby="imageTable"
           sx={{
             '& .MuiTableCell-root:first-of-type': {
               pl: 2
@@ -129,12 +131,15 @@ export default function ImageTable() {
               {images && images?.length > 0 ? (
                 images.map((image) => {
                   return (
-                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={image._id}>
-                      <TableCell align="left">{image.node}</TableCell>
-                      <TableCell align="left">{image.image}.jpg</TableCell>
-                      <TableCell align="left">{image.numberOfFaces}</TableCell>
-                      <TableCell align="left">{image.processingTime}ms</TableCell>
-                      <TableCell align="left">{image.takenAt}</TableCell>
+                    <TableRow hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={image?._id}>
+                      <TableCell component="th" scope="row" align="left">
+                        {image?._id}
+                      </TableCell>
+                      <TableCell align="left">{image?.node}</TableCell>
+                      <TableCell align="left">{image?.image}.jpg</TableCell>
+                      <TableCell align="left">{image?.number_of_faces}</TableCell>
+                      <TableCell align="left">{image?.processing_time}ms</TableCell>
+                      <TableCell align="left">{DateTimeHelper.convertToLocalFormatWithSeconds(image?.taken_at)}</TableCell>
                     </TableRow>
                   );
                 })
