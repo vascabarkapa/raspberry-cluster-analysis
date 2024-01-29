@@ -6,4 +6,3 @@ const put = (endpoint, body, params = {}) => axiosInstance.put(endpoint, body, {
 const remove = (endpoint, params = {}) => axiosInstance.delete(endpoint, { params });
 
 export { get, post, put, remove };
-

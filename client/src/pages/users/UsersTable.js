@@ -88,7 +88,6 @@ export default function UsersTable() {
           if (response) {
             setUsers(response?.data);
             setIsLoading(false);
-            setTrigger(false);
           }
         },
         (error) => {
@@ -103,7 +102,6 @@ export default function UsersTable() {
 
   function handleOpenUsersFormModal(type = 'add', user = null) {
     setUserToForm(null);
-    setInitialRender(true);
 
     if (type === 'edit') {
       setUserToForm(user);

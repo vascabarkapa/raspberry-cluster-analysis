@@ -26,8 +26,8 @@ const UsersDeleteModal = ({ open, setOpen, user, setTrigger }) => {
       (response) => {
         if (response) {
           toast.info(`User "${response?.data?.username}" is deleted`);
+          setTrigger((prevState) => !prevState);
           setOpen(false);
-          setTrigger(true);
         }
       },
       (error) => {

@@ -20,7 +20,6 @@ import { toast } from 'react-toastify';
 const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
   const handleClose = () => {
     setOpen(false);
-    setTrigger(true);
   };
 
   return (
@@ -52,8 +51,8 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
                     if (response) {
                       setStatus({ success: false });
                       setSubmitting(false);
+                      setTrigger((prevState) => !prevState);
                       setOpen(false);
-                      setTrigger(true);
                       toast.success(`User "${response?.data?.username}" created`);
                     }
                   },
@@ -69,8 +68,8 @@ const UsersFormModal = ({ open, setOpen, user, setTrigger }) => {
                     if (response) {
                       setStatus({ success: false });
                       setSubmitting(false);
+                      setTrigger((prevState) => !prevState);
                       setOpen(false);
-                      setTrigger(true);
                       toast.success(`User "${response?.data?.username}" updated`);
                     }
                   },
