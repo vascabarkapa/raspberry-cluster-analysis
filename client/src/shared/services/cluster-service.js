@@ -2,8 +2,8 @@ import { get, post } from './api-client';
 
 const ENDPOINT = '/cluster';
 
-function getClusters() {
-  return get(ENDPOINT);
+function getClusters(params = '') {
+  return get(ENDPOINT, params);
 }
 
 function createClusters(user) {

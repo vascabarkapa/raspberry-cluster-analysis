@@ -9,10 +9,10 @@ import ImageService from '../../shared/services/image-service';
 // project import
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
+import TablePagination from '../../components/loading/TablePagination';
 
 // toast
 import { toast } from 'react-toastify';
-import TablePagination from '../../components/loading/TablePagination';
 
 // ==============================|| IMAGE TABLE - HEADER CELL ||============================== //
 
@@ -178,14 +178,16 @@ export default function ImageTable() {
               )}
             </TableBody>
           )}
-          <TablePagination
-            colSpan={6}
-            totalItems={totalImages}
-            pageSize={pageSize}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-          />
+          {totalImages && totalImages > 0 && (
+            <TablePagination
+              colSpan={6}
+              totalItems={totalImages}
+              pageSize={pageSize}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          )}
         </Table>
       </TableContainer>
     </Box>

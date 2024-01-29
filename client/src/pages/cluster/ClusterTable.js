@@ -12,6 +12,7 @@ import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import Dot from 'components/@extended/Dot';
 import TableLoading from '../../components/loading/TableLoading';
 import TableEmpty from '../../components/loading/TableEmpty';
+import TablePagination from '../../components/loading/TablePagination';
 
 // toast
 import { toast } from 'react-toastify';
@@ -120,6 +121,10 @@ export default function ClusterTable() {
   const [initialRender, setInitialRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [clusters, setClusters] = useState([]);
+  const [pageSize, setPageSize] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
+  const [totalClusters, setTotalClusters] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setIsLoading(true);
@@ -128,7 +133,10 @@ export default function ClusterTable() {
       ClusterService.getClusters().then(
         (response) => {
           if (response) {
-            setClusters(response?.data);
+            setClusters(response?.data?.clusters);
+            setPageSize(response?.data?.per_page);
+            setTotalPages(response?.data?.total_pages);
+            setTotalClusters(response?.data?.total_items);
             setIsLoading(false);
             toast.info('Latest cluster data loaded');
           }
@@ -142,6 +150,28 @@ export default function ClusterTable() {
 
     setInitialRender(false);
   }, [initialRender]);
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (currentPage !== value) {
+      setIsLoading(true);
+
+      ClusterService.getClusters({ page: value }).then(
+        (response) => {
+          if (response) {
+            setClusters(response?.data?.clusters);
+            setTotalPages(response?.data?.total_pages);
+            setCurrentPage(value);
+            setIsLoading(false);
+            toast.info('Latest cluster data loaded');
+          }
+        },
+        (error) => {
+          console.error(error);
+          setIsLoading(false);
+        }
+      );
+    }
+  };
 
   return (
     <Box>
@@ -194,6 +224,16 @@ export default function ClusterTable() {
                 <TableEmpty colSpan={8} text={'No Cluster information'} />
               )}
             </TableBody>
+          )}
+          {totalClusters && totalClusters > 0 && (
+            <TablePagination
+              colSpan={6}
+              totalItems={totalClusters}
+              pageSize={pageSize}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
           )}
         </Table>
       </TableContainer>
