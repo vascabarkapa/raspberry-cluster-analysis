@@ -2,14 +2,14 @@
 import { Box } from '@mui/material';
 
 // assets
-import cloudberry_logo from 'assets/images/logo/cloudberry_logo.png';
+import berry from 'assets/images/berry.jpg';
 
 // ==============================|| AUTH BLUR BACK SVG ||============================== //
 
 const AuthBackground = () => {
   return (
-    <Box sx={{ position: 'absolute', filter: 'blur(18px)', zIndex: -1, bottom: 0 }}>
-      <img src={cloudberry_logo} width="900rem" alt="cloudberry_logo" style={{ marginLeft: '-100px' }} />
+    <Box sx={{ position: 'fixed', filter: 'blur(0)', zIndex: -1, bottom: 0 }}>
+      <img src={berry} alt="berry_background" />
     </Box>
   );
 };
