@@ -3,7 +3,7 @@ const {Schema, model} = mongoose;
 
 const clusterSchema = new Schema({
     age: {
-      type: Number,
+      type: String,
       required: [true, "Cluster Age is required"]
     },
     number_of_nodes: {

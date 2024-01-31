@@ -208,7 +208,7 @@ export default function ClusterTable() {
                       <TableCell component="th" scope="row" align="left">
                         {cluster?._id}
                       </TableCell>
-                      <TableCell align="left">{cluster?.age} min</TableCell>
+                      <TableCell align="left">{cluster?.age}</TableCell>
                       <TableCell align="left">{cluster?.number_of_nodes}</TableCell>
                       <TableCell align="left">{cluster?.min_pods}</TableCell>
                       <TableCell align="left">{cluster?.max_pods}</TableCell>
