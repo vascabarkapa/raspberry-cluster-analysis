@@ -27,9 +27,9 @@ const areaChartOptions = {
   }
 };
 
-// ==============================|| LOAD THRESHOLD CHART ||============================== //
+// ==============================|| IMAGE FACES CHART ||============================== //
 
-const LoadThresholdChart = () => {
+const ImageFacesChart = () => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -110,4 +110,4 @@ const LoadThresholdChart = () => {
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
 
-export default LoadThresholdChart;
+export default ImageFacesChart;

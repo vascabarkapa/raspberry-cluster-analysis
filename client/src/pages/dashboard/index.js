@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { updatePageTitle } from '../../utils/TitleUtils';
 
 // material-ui
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 
 // project import
-import IncomeAreaChart from './IncomeAreaChart';
 import MonthlyBarChart from './MonthlyBarChart';
 import LoadThresholdChart from './LoadThresholdChart';
 import MainCard from 'components/MainCard';
+import ImageFacesChart from './ImageFacesChart';
 
 // toast
 import { toast } from 'react-toastify';
@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 
 const DashboardDefault = () => {
   const [initialRender, setInitialRender] = useState(true);
-  const [slot, setSlot] = useState('week');
 
   useEffect(() => {
     updatePageTitle('Cloudberry');
@@ -27,7 +26,7 @@ const DashboardDefault = () => {
     }
 
     setInitialRender(false);
-  }, [slot, initialRender]);
+  }, [initialRender]);
 
   return (
     <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
@@ -41,7 +40,7 @@ const DashboardDefault = () => {
           </Grid>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <LoadThresholdChart slot={slot} />
+              <LoadThresholdChart />
             </Box>
           </MainCard>
         </Grid>
@@ -50,32 +49,12 @@ const DashboardDefault = () => {
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">Image Details</Typography>
-            </Grid>
-            <Grid item>
-              <Stack direction="row" alignItems="center" spacing={0}>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('month')}
-                  color={slot === 'month' ? 'primary' : 'secondary'}
-                  variant={slot === 'month' ? 'outlined' : 'text'}
-                >
-                  Month
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('week')}
-                  color={slot === 'week' ? 'primary' : 'secondary'}
-                  variant={slot === 'week' ? 'outlined' : 'text'}
-                >
-                  Week
-                </Button>
-              </Stack>
+              <Typography variant="h5">The number of faces recognized in the last 24 hours</Typography>
             </Grid>
           </Grid>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart slot={slot} />
+              <ImageFacesChart />
             </Box>
           </MainCard>
         </Grid>
