@@ -51,6 +51,7 @@ const AverageImageBarChart = () => {
 
   const [series] = useState([
     {
+      name: 'Faces',
       data: [80, 95, 70, 42, 65, 55, 78]
     }
   ]);

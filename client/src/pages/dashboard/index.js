@@ -71,7 +71,7 @@ const DashboardDefault = () => {
                 <Typography variant="h6" color="textSecondary">
                   Average number of faces this week
                 </Typography>
-                <Typography variant="h3">80</Typography>
+                <Typography variant="h3">80 faces</Typography>
               </Stack>
             </Box>
             <AverageImageBarChart />

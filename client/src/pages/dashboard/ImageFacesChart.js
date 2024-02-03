@@ -87,10 +87,6 @@ const ImageFacesChart = () => {
     {
       name: 'Page Views',
       data: [0, 86, 28, 115, 48, 210, 136]
-    },
-    {
-      name: 'Sessions',
-      data: [0, 43, 14, 56, 24, 105, 68]
     }
   ]);
 
@@ -99,10 +95,6 @@ const ImageFacesChart = () => {
       {
         name: 'Page Views',
         data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 86, 115, 35]
-      },
-      {
-        name: 'Sessions',
-        data: [110, 60, 150, 35, 60, 36, 26, 45, 65, 52, 53, 41]
       }
     ]);
   }, []);
