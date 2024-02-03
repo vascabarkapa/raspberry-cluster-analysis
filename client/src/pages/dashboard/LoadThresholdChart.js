@@ -85,11 +85,11 @@ const LoadThresholdChart = () => {
 
   const [series, setSeries] = useState([
     {
-      name: 'Page Views',
+      name: 'Load Threshold',
       data: [70, 70, 70, 70, 70, 70, 70]
     },
     {
-      name: 'Sessions',
+      name: 'Cluster Load',
       data: [0, 43, 14, 56, 24, 105, 68]
     }
   ]);
@@ -97,11 +97,11 @@ const LoadThresholdChart = () => {
   useEffect(() => {
     setSeries([
       {
-        name: 'Page Views',
+        name: 'Load Threshold',
         data: [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]
       },
       {
-        name: 'Sessions',
+        name: 'Cluster Load',
         data: [90, 60, 95, 35, 60, 36, 26, 45, 65, 52, 53, 41]
       }
     ]);

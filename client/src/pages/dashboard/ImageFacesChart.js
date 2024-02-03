@@ -85,7 +85,7 @@ const ImageFacesChart = () => {
 
   const [series, setSeries] = useState([
     {
-      name: 'Page Views',
+      name: 'Number of Faces',
       data: [0, 86, 28, 115, 48, 210, 136]
     }
   ]);
@@ -93,7 +93,7 @@ const ImageFacesChart = () => {
   useEffect(() => {
     setSeries([
       {
-        name: 'Page Views',
+        name: 'Number of Faces',
         data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 86, 115, 35]
       }
     ]);
