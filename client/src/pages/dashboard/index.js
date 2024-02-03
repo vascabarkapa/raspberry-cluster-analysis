@@ -5,7 +5,7 @@ import { updatePageTitle } from '../../utils/TitleUtils';
 import { Box, Grid, Stack, Typography } from '@mui/material';
 
 // project import
-import MonthlyBarChart from './MonthlyBarChart';
+import AverageImageBarChart from './AverageImageBarChart';
 import LoadThresholdChart from './LoadThresholdChart';
 import MainCard from 'components/MainCard';
 import ImageFacesChart from './ImageFacesChart';
@@ -49,7 +49,7 @@ const DashboardDefault = () => {
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">The number of faces recognized in the last 24 hours</Typography>
+              <Typography variant="h5">The Number of Faces recognized in the last 24 hours</Typography>
             </Grid>
           </Grid>
           <MainCard content={false} sx={{ mt: 1.5 }}>
@@ -69,12 +69,12 @@ const DashboardDefault = () => {
             <Box sx={{ p: 3, pb: 0 }}>
               <Stack spacing={2}>
                 <Typography variant="h6" color="textSecondary">
-                  This Week Statistics
+                  Average number of faces this week
                 </Typography>
                 <Typography variant="h3">80</Typography>
               </Stack>
             </Box>
-            <MonthlyBarChart />
+            <AverageImageBarChart />
           </MainCard>
         </Grid>
       </Grid>
