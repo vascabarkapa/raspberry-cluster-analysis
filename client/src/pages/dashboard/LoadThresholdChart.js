@@ -69,7 +69,7 @@ const LoadThresholdChart = ({ loadThreshold }) => {
         theme: 'light'
       }
     }));
-  }, [primary, secondary, line, theme]);
+  }, [primary, secondary, line, theme, loadThreshold]);
 
   const [series, setSeries] = useState([
     {
@@ -93,7 +93,7 @@ const LoadThresholdChart = ({ loadThreshold }) => {
         data: loadThreshold['load']
       }
     ]);
-  }, []);
+  }, [loadThreshold]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
