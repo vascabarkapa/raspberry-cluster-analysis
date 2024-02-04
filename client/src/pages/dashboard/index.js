@@ -33,32 +33,37 @@ const DashboardDefault = () => {
   const [averageImageStats, setAverageImageStats] = useState({});
 
   useEffect(() => {
-    setIsLoading(true);
-    updatePageTitle('Cloudberry');
+    const fetchData = async () => {
+      setIsLoading(true);
+      updatePageTitle('Cloudberry');
 
-    if (!initialRender) {
-      ImageService.getNumberOfFaces().then((numberOfFacesResponse) => {
-        if (numberOfFacesResponse) {
+      if (!initialRender) {
+        try {
+          const numberOfFacesResponse = await ImageService.getNumberOfFaces();
           setNumberOfFaces(numberOfFacesResponse?.data);
 
-          ClusterService.getLoadThreshold().then((loadThresholdResponse) => {
-            if (loadThresholdResponse) {
-              setLoadThreshold(loadThresholdResponse?.data);
+          const loadThresholdResponse = await ClusterService.getLoadThreshold();
+          setLoadThreshold(loadThresholdResponse?.data);
 
-              ImageService.getAverageImageStats().then((averageImageStatsResponse) => {
-                if (averageImageStatsResponse) {
-                  setAverageImageStats(averageImageStatsResponse?.data);
-                  setIsLoading(false);
-                  toast.info('Loaded latest data');
-                }
-              });
-            }
-          });
+          const averageImageStatsResponse = await ImageService.getAverageImageStats();
+          setAverageImageStats(averageImageStatsResponse?.data);
+
+          setIsLoading(false);
+          toast.info('Loaded latest data');
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setIsLoading(false);
         }
-      });
-    }
+      }
 
-    setInitialRender(false);
+      setInitialRender(false);
+    };
+
+    fetchData();
+
+    const fetchDataInterval = setInterval(fetchData, 60000);
+
+    return () => clearInterval(fetchDataInterval);
   }, [initialRender]);
 
   return (
@@ -128,9 +133,7 @@ const DashboardDefault = () => {
           </Grid>
         </Grid>
       </Grid>
-    ) : (
-      <Dots />
-    )
+    ) : <Dots />
   );
 };
 
