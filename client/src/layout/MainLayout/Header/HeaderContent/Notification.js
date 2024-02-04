@@ -61,6 +61,23 @@ const Notification = () => {
   const [numberOfUnreadNotifications, setNumberOfUnreadNotifications] = useState(0);
   const [notifications, setNotifications] = useState([]);
 
+  function handleReadNotification(id) {
+    NotificationService.readNotification(id).then((readResponse) => {
+      if (readResponse) {
+        NotificationService.getNotifications().then((response) => {
+            if (response) {
+              const notifications = response?.data;
+              const unreadNotifications = notifications.filter(notification => !notification.is_read);
+
+              setNotifications(notifications);
+              setNumberOfUnreadNotifications(unreadNotifications.length);
+            }
+          }
+        );
+      }
+    });
+  }
+
   useEffect(() => {
     if (!initialRender) {
       NotificationService.getNotifications().then((response) => {
@@ -169,7 +186,8 @@ const Notification = () => {
                   >
                     {notifications.map((notification) => (
                         <>
-                          <ListItemButton sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}>
+                          <ListItemButton sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}
+                                          onClick={() => handleReadNotification(notification?._id)}>
                             <ListItemAvatar>
                               <Avatar
                                 sx={{
