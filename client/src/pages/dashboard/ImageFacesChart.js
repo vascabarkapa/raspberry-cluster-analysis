@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 // material-ui
@@ -29,7 +30,7 @@ const areaChartOptions = {
 
 // ==============================|| IMAGE FACES CHART ||============================== //
 
-const ImageFacesChart = () => {
+const ImageFacesChart = ({ numberOfFaces }) => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -42,23 +43,10 @@ const ImageFacesChart = () => {
       ...prevState,
       colors: [theme.palette.primary.main, theme.palette.primary[700]],
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: numberOfFaces['datetime'],
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
+            colors: secondary
           }
         },
         axisBorder: {
@@ -70,7 +58,7 @@ const ImageFacesChart = () => {
       yaxis: {
         labels: {
           style: {
-            colors: [secondary]
+            colors: secondary
           }
         }
       },
@@ -81,12 +69,12 @@ const ImageFacesChart = () => {
         theme: 'light'
       }
     }));
-  }, [primary, secondary, line, theme]);
+  }, [primary, secondary, line, theme, numberOfFaces]);
 
   const [series, setSeries] = useState([
     {
       name: 'Number of Faces',
-      data: [0, 86, 28, 115, 48, 210, 136]
+      data: []
     }
   ]);
 
@@ -94,12 +82,16 @@ const ImageFacesChart = () => {
     setSeries([
       {
         name: 'Number of Faces',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 86, 115, 35]
+        data: numberOfFaces['data']
       }
     ]);
-  }, []);
+  }, [numberOfFaces]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
+};
+
+ImageFacesChart.propTypes = {
+  numberOfFaces: PropTypes.object
 };
 
 export default ImageFacesChart;
