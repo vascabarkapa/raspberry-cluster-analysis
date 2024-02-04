@@ -10,9 +10,9 @@ function createClusters(user) {
   return post(ENDPOINT, user);
 }
 
-const ImageService = {
+const ClusterService = {
   getClusters,
   createClusters
 };
 
-export default ImageService;
+export default ClusterService;
