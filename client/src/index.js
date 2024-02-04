@@ -61,6 +61,7 @@ const MainApp = () => {
                 autoClose={1500}
                 hideProgressBar
                 newestOnTop
+                pauseOnFocusLoss={false}
                 closeOnClick
                 rtl={false}
                 draggable
