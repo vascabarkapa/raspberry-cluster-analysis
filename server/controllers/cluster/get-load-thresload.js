@@ -8,7 +8,7 @@ export default asyncHandler(async (req, res) => {
 
     const clusters = await Cluster.find({
       createdAt: { $gte: twentyFourHoursAgo },
-    }).sort({ createdAt: -1 });
+    });
 
     const load = clusters.map((cluster) => cluster.load);
     const load_threshold = clusters.map((cluster) => cluster.load_threshold);

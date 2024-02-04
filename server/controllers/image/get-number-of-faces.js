@@ -7,8 +7,8 @@ export default asyncHandler(async (req, res) => {
     oneHourAgo.setHours(oneHourAgo.getHours() - 1);
 
     const images = await Image.find({
-      taken_at: { $gte: oneHourAgo },
-    });
+      taken_at: { $gte: oneHourAgo }
+    }).sort({ createdAt: -1 });
 
     const data = images.map((image) => image.number_of_faces);
     const datetime = images.map((image) => {
@@ -22,7 +22,7 @@ export default asyncHandler(async (req, res) => {
 
     res.json({ data, datetime });
   } catch (error) {
-    console.error("Error retrieving images from the database:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error('Error retrieving images from the database:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
