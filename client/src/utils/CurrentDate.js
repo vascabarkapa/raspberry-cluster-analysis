@@ -5,4 +5,4 @@ export const getCurrentDate = () => {
   const godina = danas.getFullYear();
 
   return `${dan}.${mesec}.${godina}`;
-}
+};

@@ -5,12 +5,12 @@ export const getGreetingMessage = () => {
 
   let greetingMessage;
   if (currentHour >= 4 && currentHour < 12) {
-    greetingMessage = "Good morning";
+    greetingMessage = 'Good morning';
   } else if (currentHour >= 12 && currentHour < 20) {
-    greetingMessage = "Good afternoon";
+    greetingMessage = 'Good afternoon';
   } else {
-    greetingMessage = "Good evening";
+    greetingMessage = 'Good evening';
   }
 
-  return greetingMessage + ", " + CURRENT_USER?.first_name + " " + CURRENT_USER?.last_name;
+  return greetingMessage + ', ' + CURRENT_USER?.first_name + ' ' + CURRENT_USER?.last_name;
 };
