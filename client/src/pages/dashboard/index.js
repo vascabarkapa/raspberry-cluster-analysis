@@ -10,6 +10,7 @@ import LoadThresholdChart from './LoadThresholdChart';
 import MainCard from 'components/MainCard';
 import ImageFacesChart from './ImageFacesChart';
 import Dots from '../../components/loading/Dots';
+import Clock from '../../components/third-party/Clock';
 
 // toast
 import { toast } from 'react-toastify';
@@ -17,6 +18,10 @@ import { toast } from 'react-toastify';
 // services
 import ImageService from '../../shared/services/image-service';
 import ClusterService from '../../shared/services/cluster-service';
+
+// utils
+import { getGreetingMessage } from '../../utils/GreetingMessage';
+import { getCurrentDate } from '../../utils/CurrentDate';
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
@@ -36,7 +41,6 @@ const DashboardDefault = () => {
           setNumberOfFaces(numberOfFacesResponse?.data);
 
           ClusterService.getLoadThreshold().then((loadThresholdResponse) => {
-            console.log(loadThresholdResponse)
             if (loadThresholdResponse) {
               setLoadThreshold(loadThresholdResponse?.data);
               setIsLoading(false);
@@ -55,6 +59,21 @@ const DashboardDefault = () => {
       <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
           {/* row 1 */}
+            <Grid item xs={6} sx={{ mb: 3 }}>
+              <Box textAlign="left">
+                <Typography variant="h2">{getGreetingMessage()}</Typography>
+                <Typography>Assume command over your Raspberry Pi cluster.</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box textAlign="right">
+                <Typography variant="h2">
+                  <Clock />
+                </Typography>
+                <Typography>{getCurrentDate()}</Typography>
+              </Box>
+            </Grid>
+          {/* row 2 */}
           <Grid item xs={12} md={12} lg={12}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
@@ -68,7 +87,7 @@ const DashboardDefault = () => {
             </MainCard>
           </Grid>
 
-          {/* row 2 */}
+          {/* row 1 */}
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
