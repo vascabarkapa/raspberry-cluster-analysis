@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 // material-ui
@@ -29,7 +30,7 @@ const areaChartOptions = {
 
 // ==============================|| LOAD THRESHOLD CHART ||============================== //
 
-const LoadThresholdChart = () => {
+const LoadThresholdChart = ({ loadThreshold }) => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -42,23 +43,10 @@ const LoadThresholdChart = () => {
       ...prevState,
       colors: [theme.palette.success.light, theme.palette.primary[700]],
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: loadThreshold['datetime'],
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
+            colors: secondary
           }
         },
         axisBorder: {
@@ -70,7 +58,7 @@ const LoadThresholdChart = () => {
       yaxis: {
         labels: {
           style: {
-            colors: [secondary]
+            colors: secondary
           }
         }
       },
@@ -98,16 +86,20 @@ const LoadThresholdChart = () => {
     setSeries([
       {
         name: 'Load Threshold',
-        data: [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70]
+        data: loadThreshold['load_threshold']
       },
       {
         name: 'Cluster Load',
-        data: [90, 60, 95, 35, 60, 36, 26, 45, 65, 52, 53, 41]
+        data: loadThreshold['load']
       }
     ]);
   }, []);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
+};
+
+LoadThresholdChart.propTypes = {
+  loadThreshold: PropTypes.object
 };
 
 export default LoadThresholdChart;
