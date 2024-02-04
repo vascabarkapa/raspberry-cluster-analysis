@@ -10,8 +10,8 @@ export default asyncHandler(async (req, res) => {
     const images = await Image.find({
       taken_at: {
         $gte: startDate.toDate(),
-        $lte: endDate.toDate()
-      }
+        $lte: endDate.toDate(),
+      },
     }).sort({ taken_at: -1 });
 
     const averageFacesByDay = {};
@@ -22,7 +22,7 @@ export default asyncHandler(async (req, res) => {
       if (!averageFacesByDay[day]) {
         averageFacesByDay[day] = {
           totalFaces: 0,
-          count: 0
+          count: 0,
         };
       }
 
@@ -36,7 +36,6 @@ export default asyncHandler(async (req, res) => {
     const sortedDaysOfWeek = allDaysOfWeek.slice(allDaysOfWeek.indexOf('Monday')).concat(allDaysOfWeek.slice(0, allDaysOfWeek.indexOf('Monday')));
 
     const data = [];
-    const days = [];
 
     sortedDaysOfWeek.forEach((day) => {
       if (!averageFacesByDay[day]) {
@@ -46,7 +45,6 @@ export default asyncHandler(async (req, res) => {
         result[day] = parseFloat(average);
       }
 
-      days.push(day);
       data.push(result[day]);
     });
 
@@ -55,13 +53,12 @@ export default asyncHandler(async (req, res) => {
 
     const finalResult = {
       data: data,
-      days: days,
-      total_average: result.totalAverage
+      total_average: result.totalAverage,
     };
 
     res.json(finalResult);
   } catch (error) {
-    console.error('Error retrieving and processing images from the database:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error retrieving and processing images from the database:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
