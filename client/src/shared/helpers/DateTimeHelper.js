@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 function convertToLocalFormatWithSeconds(dateTime) {
   const dateObj = new Date(dateTime);
 
@@ -33,9 +35,36 @@ function convertToLocalFormat(dateTime) {
   return formattedDate + ' ' + formattedTime;
 }
 
+function calculateTimeAgo(createdAt) {
+  const currentTime = moment();
+  const notificationTime = moment(createdAt);
+
+  const timeDifference = currentTime.diff(notificationTime, 'minutes');
+
+  if (timeDifference < 60) {
+    if (timeDifference < 2) {
+      return '1 min ago';
+    } else {
+      return `${timeDifference} mins ago`;
+    }
+  } else if (timeDifference < 180) {
+    const hours = Math.floor(timeDifference / 60);
+    return `${hours}h ago`;
+  } else if (notificationTime.isSame(currentTime, 'day')) {
+    return notificationTime.format('HH:mm');
+  } else if (notificationTime.isSame(currentTime, 'yesterday')) {
+    return '1 day ago';
+  } else if (notificationTime.isAfter(currentTime.clone().subtract(2, 'days').startOf('day'))) {
+    return '2 days ago';
+  } else {
+    return notificationTime.format('MMM D');
+  }
+}
+
 const DateTimeHelper = {
   convertToLocalFormatWithSeconds,
-  convertToLocalFormat
+  convertToLocalFormat,
+  calculateTimeAgo
 };
 
 export default DateTimeHelper;
