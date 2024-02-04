@@ -4,7 +4,7 @@ const ENDPOINT = '/notification';
 const CURRENT_USER = JSON.parse(localStorage.getItem('current_user'));
 
 function getNotifications() {
-  return get(ENDPOINT + '/' + CURRENT_USER?._id);
+  return get(ENDPOINT + '/' + CURRENT_USER?.id);
 }
 
 function readNotification(id) {
