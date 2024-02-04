@@ -73,7 +73,7 @@ const DashboardDefault = () => {
         <Grid item xs={12} sm={6} sx={{ mb: 3 }}>
           <Box textAlign="left">
             <Typography variant="h2">{getGreetingMessage()}</Typography>
-            <Typography>Assume command over your Raspberry Pi cluster.</Typography>
+            <Typography>Assume command over your Raspberry Pi cluster</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} sm={6} sx={{ display: { xs: 'none', sm: 'block' } }}>
