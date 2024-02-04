@@ -88,7 +88,7 @@ const DashboardDefault = () => {
         <Grid item xs={12} md={12} lg={12}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">Cluster Load in the last 24 hours</Typography>
+              <Typography variant="h5">Cluster Load in the Last 24 Hours</Typography>
             </Grid>
           </Grid>
           <MainCard content={false} sx={{ mt: 1.5 }}>
@@ -102,7 +102,7 @@ const DashboardDefault = () => {
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">The Number of Faces recognized in the last hour</Typography>
+              <Typography variant="h5">The Number of Faces Recognized in the Last Hour</Typography>
             </Grid>
           </Grid>
           <MainCard content={false} sx={{ mt: 1.5 }}>
