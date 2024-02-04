@@ -10,9 +10,14 @@ function createImage(user) {
   return post(ENDPOINT, user);
 }
 
+function getNumberOfFaces() {
+  return get(ENDPOINT + "/number-of-faces");
+}
+
 const ImageService = {
   getImages,
-  createImage
+  createImage,
+  getNumberOfFaces
 };
 
 export default ImageService;
