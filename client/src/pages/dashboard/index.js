@@ -66,74 +66,74 @@ const DashboardDefault = () => {
     return () => clearInterval(fetchDataInterval);
   }, [initialRender]);
 
-  return (
-    !initialRender && !isLoading ? (
-      <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
-        <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-          {/* row 1 */}
-          <Grid item xs={12} sm={6} sx={{ mb: 3 }}>
-            <Box textAlign="left">
-              <Typography variant="h2">{getGreetingMessage()}</Typography>
-              <Typography>Assume command over your Raspberry Pi cluster.</Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Box textAlign="right">
-              <Typography variant="h2">
-                <Clock />
-              </Typography>
-              <Typography>{getCurrentDate()}</Typography>
-            </Box>
-          </Grid>
-          {/* row 2 */}
-          <Grid item xs={12} md={12} lg={12}>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h5">Cluster Load in the last 24 hours</Typography>
-              </Grid>
+  return !initialRender && !isLoading ? (
+    <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
+      <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+        {/* row 1 */}
+        <Grid item xs={12} sm={6} sx={{ mb: 3 }}>
+          <Box textAlign="left">
+            <Typography variant="h2">{getGreetingMessage()}</Typography>
+            <Typography>Assume command over your Raspberry Pi cluster.</Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={6} sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box textAlign="right">
+            <Typography variant="h2">
+              <Clock />
+            </Typography>
+            <Typography>{getCurrentDate()}</Typography>
+          </Box>
+        </Grid>
+        {/* row 2 */}
+        <Grid item xs={12} md={12} lg={12}>
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Grid item>
+              <Typography variant="h5">Cluster Load in the last 24 hours</Typography>
             </Grid>
-            <MainCard content={false} sx={{ mt: 1.5 }}>
-              <Box sx={{ pt: 1, pr: 2 }}>
-                <LoadThresholdChart loadThreshold={loadThreshold} />
-              </Box>
-            </MainCard>
           </Grid>
+          <MainCard content={false} sx={{ mt: 1.5 }}>
+            <Box sx={{ pt: 1, pr: 2 }}>
+              <LoadThresholdChart loadThreshold={loadThreshold} />
+            </Box>
+          </MainCard>
+        </Grid>
 
-          {/* row 1 */}
-          <Grid item xs={12} md={7} lg={8}>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h5">The Number of Faces recognized in the last hour</Typography>
-              </Grid>
+        {/* row 1 */}
+        <Grid item xs={12} md={7} lg={8}>
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Grid item>
+              <Typography variant="h5">The Number of Faces recognized in the last hour</Typography>
             </Grid>
-            <MainCard content={false} sx={{ mt: 1.5 }}>
-              <Box sx={{ pt: 1, pr: 2 }}>
-                <ImageFacesChart numberOfFaces={numberOfFaces} />
-              </Box>
-            </MainCard>
           </Grid>
-          <Grid item xs={12} md={5} lg={4}>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h5">Weekly Average</Typography>
-              </Grid>
-              <Grid item />
+          <MainCard content={false} sx={{ mt: 1.5 }}>
+            <Box sx={{ pt: 1, pr: 2 }}>
+              <ImageFacesChart numberOfFaces={numberOfFaces} />
+            </Box>
+          </MainCard>
+        </Grid>
+        <Grid item xs={12} md={5} lg={4}>
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Grid item>
+              <Typography variant="h5">Weekly Average</Typography>
             </Grid>
-            <MainCard sx={{ mt: 2 }} content={false}>
-              <Box sx={{ p: 3, pb: 0 }}>
-                <Stack spacing={2}>
-                  <Typography variant="h6" color="textSecondary">
-                    Average number of faces this week:
-                  </Typography>
-                  <Typography variant="h3">{averageImageStats['total_average']} faces</Typography>
-                </Stack>
-              </Box>
-              <AverageImageBarChart averageImageStats={averageImageStats} />
-            </MainCard>
+            <Grid item />
           </Grid>
+          <MainCard sx={{ mt: 2 }} content={false}>
+            <Box sx={{ p: 3, pb: 0 }}>
+              <Stack spacing={2}>
+                <Typography variant="h6" color="textSecondary">
+                  Average number of faces this week:
+                </Typography>
+                <Typography variant="h3">{averageImageStats['total_average']} faces</Typography>
+              </Stack>
+            </Box>
+            <AverageImageBarChart averageImageStats={averageImageStats} />
+          </MainCard>
         </Grid>
       </Grid>
-    ) : <Dots />
+    </Grid>
+  ) : (
+    <Dots />
   );
 };
 
