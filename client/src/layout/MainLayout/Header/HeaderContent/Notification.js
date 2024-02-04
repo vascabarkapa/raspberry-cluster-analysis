@@ -65,15 +65,14 @@ const Notification = () => {
     NotificationService.readNotification(id).then((readResponse) => {
       if (readResponse) {
         NotificationService.getNotifications().then((response) => {
-            if (response) {
-              const notifications = response?.data;
-              const unreadNotifications = notifications.filter(notification => !notification.is_read);
+          if (response) {
+            const notifications = response?.data;
+            const unreadNotifications = notifications.filter((notification) => !notification.is_read);
 
-              setNotifications(notifications);
-              setNumberOfUnreadNotifications(unreadNotifications.length);
-            }
+            setNotifications(notifications);
+            setNumberOfUnreadNotifications(unreadNotifications.length);
           }
-        );
+        });
       }
     });
   }
@@ -82,25 +81,25 @@ const Notification = () => {
     NotificationService.readAllNotifications().then((readAllResponse) => {
       if (readAllResponse) {
         NotificationService.getNotifications().then((response) => {
-            if (response) {
-              const notifications = response?.data;
-              const unreadNotifications = notifications.filter(notification => !notification.is_read);
+          if (response) {
+            const notifications = response?.data;
+            const unreadNotifications = notifications.filter((notification) => !notification.is_read);
 
-              setNotifications(notifications);
-              setNumberOfUnreadNotifications(unreadNotifications.length);
-            }
+            setNotifications(notifications);
+            setNumberOfUnreadNotifications(unreadNotifications.length);
           }
-        );
+        });
       }
     });
   }
 
   useEffect(() => {
     if (!initialRender) {
-      NotificationService.getNotifications().then((response) => {
+      NotificationService.getNotifications().then(
+        (response) => {
           if (response) {
             const notifications = response?.data;
-            const unreadNotifications = notifications.filter(notification => !notification.is_read);
+            const unreadNotifications = notifications.filter((notification) => !notification.is_read);
 
             setNotifications(notifications);
             setNumberOfUnreadNotifications(unreadNotifications.length);
@@ -197,55 +196,68 @@ const Notification = () => {
                         '& .MuiAvatar-root': avatarSX,
                         '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
                       },
-                      height: '315px',
+                      maxHeight: '315px',
                       overflow: 'auto'
                     }}
                   >
-                    {notifications.map((notification) => (
-                        <>
-                          <ListItemButton sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}
-                                          onClick={() => handleReadNotification(notification?._id)}>
-                            <ListItemAvatar>
-                              <Avatar
-                                sx={{
-                                  color: 'error.main',
-                                  bgcolor: 'error.lighter'
-                                }}
-                              >
-                                <SettingOutlined />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary={
-                                <Typography variant="h6" sx={{ mr: 5 }}>
-                                  Your cluster is&nbsp;
-                                  <Typography component="span" variant="subtitle1">
-                                    overloaded!
-                                  </Typography>{' '}
+                    {notifications && notifications?.length > 0 ? (
+                      notifications.map((notification) => {
+                        return (
+                          <>
+                            <ListItemButton
+                              sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}
+                              onClick={() => handleReadNotification(notification?._id)}
+                            >
+                              <ListItemAvatar>
+                                <Avatar
+                                  sx={{
+                                    color: 'error.main',
+                                    bgcolor: 'error.lighter'
+                                  }}
+                                >
+                                  <SettingOutlined />
+                                </Avatar>
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={
+                                  <Typography variant="h6" sx={{ mr: 5 }}>
+                                    Your cluster is&nbsp;
+                                    <Typography component="span" variant="subtitle1">
+                                      overloaded!
+                                    </Typography>{' '}
+                                  </Typography>
+                                }
+                                secondary={notification?.description}
+                              />
+                              <ListItemSecondaryAction>
+                                <Typography variant="caption" noWrap>
+                                  {DateTimeHelper.calculateTimeAgo(notification?.createdAt)}
                                 </Typography>
-                              }
-                              secondary={notification?.description}
-                            />
-                            <ListItemSecondaryAction>
-                              <Typography variant="caption" noWrap>
-                                {DateTimeHelper.calculateTimeAgo(notification?.createdAt)}
-                              </Typography>
-                            </ListItemSecondaryAction>
-                          </ListItemButton>
-                          <Divider />
-                        </>
-                      )
+                              </ListItemSecondaryAction>
+                            </ListItemButton>
+                            <Divider />
+                          </>
+                        );
+                      })
+                    ) : (
+                      <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }} disabled>
+                        <ListItemText primary={<Typography variant="h6">There aren&apos;t new notifications</Typography>} />
+                      </ListItemButton>
                     )}
                   </List>
-                  <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }} onClick={() => handleReadAllNotification()}>
-                    <ListItemText
-                      primary={
-                        <Typography variant="h6" color="primary">
-                          Read All
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
+                  {notifications && notifications.length > 0 ? (
+                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }} onClick={() => handleReadAllNotification()}>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6" color="primary">
+                            Read All
+                          </Typography>
+                        }
+                      />
+                    </ListItemButton>
+                  ) : (
+                    <></>
+                  )}
                 </MainCard>
               </ClickAwayListener>
             </Paper>
