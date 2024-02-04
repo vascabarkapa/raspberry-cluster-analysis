@@ -25,7 +25,7 @@ import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 
 // assets
-import { BellOutlined, CloseOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { BellOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons';
 
 // sx styles
 const avatarSX = {
@@ -78,7 +78,7 @@ const Notification = () => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Badge badgeContent={4} color="primary">
+        <Badge badgeContent={1} color="primary">
           <BellOutlined />
         </Badge>
       </IconButton>
@@ -115,7 +115,7 @@ const Notification = () => {
             >
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard
-                  title="Notification"
+                  title="Notifications"
                   elevation={0}
                   border={false}
                   content={false}
@@ -140,65 +140,6 @@ const Notification = () => {
                       <ListItemAvatar>
                         <Avatar
                           sx={{
-                            color: 'success.main',
-                            bgcolor: 'success.lighter'
-                          }}
-                        >
-                          <GiftOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            It&apos;s{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Cristina danny&apos;s
-                            </Typography>{' '}
-                            birthday today.
-                          </Typography>
-                        }
-                        secondary="2 min ago"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          3:00 AM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'primary.main',
-                            bgcolor: 'primary.lighter'
-                          }}
-                        >
-                          <MessageOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Aida Burg
-                            </Typography>{' '}
-                            commented your post.
-                          </Typography>
-                        }
-                        secondary="5 August"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          6:00 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
                             color: 'error.main',
                             bgcolor: 'error.lighter'
                           }}
@@ -208,50 +149,18 @@ const Notification = () => {
                       </ListItemAvatar>
                       <ListItemText
                         primary={
-                          <Typography variant="h6">
-                            Your Profile is Complete &nbsp;
+                          <Typography variant="h6" sx={{ mr: 5 }}>
+                            Your cluster is&nbsp;
                             <Typography component="span" variant="subtitle1">
-                              60%
+                              overloaded!
                             </Typography>{' '}
                           </Typography>
                         }
-                        secondary="7 hours ago"
+                        secondary="Check the health of the cluster."
                       />
                       <ListItemSecondaryAction>
                         <Typography variant="caption" noWrap>
-                          2:45 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'primary.main',
-                            bgcolor: 'primary.lighter'
-                          }}
-                        >
-                          C
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Cristina Danny
-                            </Typography>{' '}
-                            invited to join{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Meeting.
-                            </Typography>
-                          </Typography>
-                        }
-                        secondary="Daily scrum meeting time"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          9:10 PM
+                          21:45
                         </Typography>
                       </ListItemSecondaryAction>
                     </ListItemButton>
