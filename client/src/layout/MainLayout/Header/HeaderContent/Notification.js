@@ -162,7 +162,9 @@ const Notification = () => {
                         py: 0.5,
                         '& .MuiAvatar-root': avatarSX,
                         '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
-                      }
+                      },
+                      height: '315px',
+                      overflow: 'auto'
                     }}
                   >
                     {notifications.map((notification) => (
@@ -199,16 +201,16 @@ const Notification = () => {
                         </>
                       )
                     )}
-                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6" color="primary">
-                            Read All
-                          </Typography>
-                        }
-                      />
-                    </ListItemButton>
                   </List>
+                  <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="h6" color="primary">
+                          Read All
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
                 </MainCard>
               </ClickAwayListener>
             </Paper>
