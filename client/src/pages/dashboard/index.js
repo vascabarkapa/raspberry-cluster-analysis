@@ -75,7 +75,7 @@ const DashboardDefault = () => {
               <Box sx={{ p: 3, pb: 0 }}>
                 <Stack spacing={2}>
                   <Typography variant="h6" color="textSecondary">
-                    Average number of faces this week
+                    Average number of faces this week:
                   </Typography>
                   <Typography variant="h3">80 faces</Typography>
                 </Stack>
