@@ -55,20 +55,30 @@ const Notification = () => {
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const [initialRender, setInitialRender] = useState(true);
   const [numberOfUnreadNotifications, setNumberOfUnreadNotifications] = useState(0);
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    NotificationService.getNotifications().then((response) => {
-      if (response) {
-        const notifications = response?.data;
-        const unreadNotifications = notifications.filter(notification => !notification.is_read);
+    if (!initialRender) {
+      NotificationService.getNotifications().then((response) => {
+          if (response) {
+            const notifications = response?.data;
+            const unreadNotifications = notifications.filter(notification => !notification.is_read);
 
-        setNotifications(notifications);
-        setNumberOfUnreadNotifications(unreadNotifications.length);
-      }
-    });
-  }, []);
+            setNotifications(notifications);
+            setNumberOfUnreadNotifications(unreadNotifications.length);
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+
+    setInitialRender(false);
+  }, [initialRender]);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
