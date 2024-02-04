@@ -78,6 +78,23 @@ const Notification = () => {
     });
   }
 
+  function handleReadAllNotification() {
+    NotificationService.readAllNotifications().then((readAllResponse) => {
+      if (readAllResponse) {
+        NotificationService.getNotifications().then((response) => {
+            if (response) {
+              const notifications = response?.data;
+              const unreadNotifications = notifications.filter(notification => !notification.is_read);
+
+              setNotifications(notifications);
+              setNumberOfUnreadNotifications(unreadNotifications.length);
+            }
+          }
+        );
+      }
+    });
+  }
+
   useEffect(() => {
     if (!initialRender) {
       NotificationService.getNotifications().then((response) => {
@@ -220,7 +237,7 @@ const Notification = () => {
                       )
                     )}
                   </List>
-                  <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                  <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }} onClick={() => handleReadAllNotification()}>
                     <ListItemText
                       primary={
                         <Typography variant="h6" color="primary">
