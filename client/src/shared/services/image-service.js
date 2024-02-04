@@ -14,10 +14,15 @@ function getNumberOfFaces() {
   return get(ENDPOINT + '/number-of-faces');
 }
 
+function getAverageImageStats() {
+  return get(ENDPOINT + '/average-faces');
+}
+
 const ImageService = {
   getImages,
   createImage,
-  getNumberOfFaces
+  getNumberOfFaces,
+  getAverageImageStats
 };
 
 export default ImageService;

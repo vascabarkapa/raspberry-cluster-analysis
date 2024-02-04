@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 // material-ui
@@ -25,7 +26,7 @@ const barChartOptions = {
     enabled: false
   },
   xaxis: {
-    categories: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     axisBorder: {
       show: false
     },
@@ -43,7 +44,7 @@ const barChartOptions = {
 
 // ==============================|| AVERAGE IMAGE BAR CHART ||============================== //
 
-const AverageImageBarChart = () => {
+const AverageImageBarChart = ({ averageImageStats }) => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -52,7 +53,7 @@ const AverageImageBarChart = () => {
   const [series] = useState([
     {
       name: 'Faces',
-      data: [80, 95, 70, 42, 65, 55, 78]
+      data: averageImageStats['data']
     }
   ]);
 
@@ -61,11 +62,11 @@ const AverageImageBarChart = () => {
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [info],
+      colors: info,
       xaxis: {
         labels: {
           style: {
-            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary]
+            colors: secondary
           }
         }
       },
@@ -81,6 +82,10 @@ const AverageImageBarChart = () => {
       <ReactApexChart options={options} series={series} type="bar" height={365} />
     </div>
   );
+};
+
+AverageImageBarChart.propTypes = {
+  averageImageStats: PropTypes.object
 };
 
 export default AverageImageBarChart;

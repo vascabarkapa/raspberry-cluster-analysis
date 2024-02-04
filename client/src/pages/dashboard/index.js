@@ -30,6 +30,7 @@ const DashboardDefault = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [numberOfFaces, setNumberOfFaces] = useState({});
   const [loadThreshold, setLoadThreshold] = useState({});
+  const [averageImageStats, setAverageImageStats] = useState({});
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,8 +44,14 @@ const DashboardDefault = () => {
           ClusterService.getLoadThreshold().then((loadThresholdResponse) => {
             if (loadThresholdResponse) {
               setLoadThreshold(loadThresholdResponse?.data);
-              setIsLoading(false);
-              toast.info('Loaded latest data');
+
+              ImageService.getAverageImageStats().then((averageImageStatsResponse) => {
+                if (averageImageStatsResponse) {
+                  setAverageImageStats(averageImageStatsResponse?.data);
+                  setIsLoading(false);
+                  toast.info('Loaded latest data');
+                }
+              });
             }
           });
         }
@@ -113,10 +120,10 @@ const DashboardDefault = () => {
                   <Typography variant="h6" color="textSecondary">
                     Average number of faces this week:
                   </Typography>
-                  <Typography variant="h3">80 faces</Typography>
+                  <Typography variant="h3">{averageImageStats['total_average']} faces</Typography>
                 </Stack>
               </Box>
-              <AverageImageBarChart />
+              <AverageImageBarChart averageImageStats={averageImageStats} />
             </MainCard>
           </Grid>
         </Grid>
