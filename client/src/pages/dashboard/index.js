@@ -19,66 +19,73 @@ const DashboardDefault = () => {
   const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    updatePageTitle('Cloudberry');
+    const delay = 200; // 2 seconds
+    const timeoutId = setTimeout(() => {
+      updatePageTitle('Cloudberry');
 
-    if (!initialRender) {
-      toast.info('Loaded latest data');
-    }
+      if (!initialRender) {
+        toast.info('Loaded latest data');
+      }
 
-    setInitialRender(false);
+      setInitialRender(false);
+    }, delay);
+
+    return () => clearTimeout(timeoutId);
   }, [initialRender]);
 
   return (
-    <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
-      <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-        {/* row 1 */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Cluster Load in the last 24 hours</Typography>
+    !initialRender && (
+      <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
+        <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+          {/* row 1 */}
+          <Grid item xs={12} md={12} lg={12}>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h5">Cluster Load in the last 24 hours</Typography>
+              </Grid>
             </Grid>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <LoadThresholdChart />
+              </Box>
+            </MainCard>
           </Grid>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <LoadThresholdChart />
-            </Box>
-          </MainCard>
-        </Grid>
 
-        {/* row 2 */}
-        <Grid item xs={12} md={7} lg={8}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">The Number of Faces recognized in the last 24 hours</Typography>
+          {/* row 2 */}
+          <Grid item xs={12} md={7} lg={8}>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h5">The Number of Faces recognized in the last 24 hours</Typography>
+              </Grid>
             </Grid>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <ImageFacesChart />
+              </Box>
+            </MainCard>
           </Grid>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <ImageFacesChart />
-            </Box>
-          </MainCard>
-        </Grid>
-        <Grid item xs={12} md={5} lg={4}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Weekly Average</Typography>
+          <Grid item xs={12} md={5} lg={4}>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h5">Weekly Average</Typography>
+              </Grid>
+              <Grid item />
             </Grid>
-            <Grid item />
+            <MainCard sx={{ mt: 2 }} content={false}>
+              <Box sx={{ p: 3, pb: 0 }}>
+                <Stack spacing={2}>
+                  <Typography variant="h6" color="textSecondary">
+                    Average number of faces this week
+                  </Typography>
+                  <Typography variant="h3">80 faces</Typography>
+                </Stack>
+              </Box>
+              <AverageImageBarChart />
+            </MainCard>
           </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <Box sx={{ p: 3, pb: 0 }}>
-              <Stack spacing={2}>
-                <Typography variant="h6" color="textSecondary">
-                  Average number of faces this week
-                </Typography>
-                <Typography variant="h3">80 faces</Typography>
-              </Stack>
-            </Box>
-            <AverageImageBarChart />
-          </MainCard>
         </Grid>
       </Grid>
-    </Grid>
+    )
   );
 };
 
