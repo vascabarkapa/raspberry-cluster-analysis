@@ -11,7 +11,7 @@ function createImage(user) {
 }
 
 function getNumberOfFaces() {
-  return get(ENDPOINT + "/number-of-faces");
+  return get(ENDPOINT + '/number-of-faces');
 }
 
 const ImageService = {
