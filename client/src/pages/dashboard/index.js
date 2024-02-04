@@ -59,13 +59,13 @@ const DashboardDefault = () => {
       <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
           {/* row 1 */}
-            <Grid item xs={6} sx={{ mb: 3 }}>
+            <Grid item xs={12} sm={6} sx={{ mb: 3 }}>
               <Box textAlign="left">
                 <Typography variant="h2">{getGreetingMessage()}</Typography>
                 <Typography>Assume command over your Raspberry Pi cluster.</Typography>
               </Box>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} sx={{ display: { xs: 'none', sm: 'block' } }}>
               <Box textAlign="right">
                 <Typography variant="h2">
                   <Clock />
