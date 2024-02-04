@@ -21,7 +21,7 @@ export default asyncHandler(async (req, res, next) => {
         return res.status(500).json("Internal Server Error");
       });
 
-    if (!exists) return res.status(400).json("User doesn't exists");
+    if (!exists) return res.status(401).json("User doesn't exists");
 
     req.user = decoded.user;
     next();

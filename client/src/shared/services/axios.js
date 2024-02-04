@@ -48,6 +48,10 @@ axiosInstance.interceptors.response.use(
         }
         break;
 
+      case 403:
+        window.location.replace('403');
+        break;
+
       case 404:
         window.location.replace('404');
         break;
