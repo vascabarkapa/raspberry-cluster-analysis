@@ -8,7 +8,7 @@ export default asyncHandler(async (req, res) => {
 
     const images = await Image.find({
       taken_at: { $gte: oneHourAgo }
-    }).sort({ createdAt: -1 });
+    });
 
     const data = images.map((image) => image.number_of_faces);
     const datetime = images.map((image) => {
