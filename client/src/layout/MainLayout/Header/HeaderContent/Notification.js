@@ -27,8 +27,9 @@ import Transitions from 'components/@extended/Transitions';
 // assets
 import { BellOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons';
 
-// services
+// services and helpers
 import NotificationService from '../../../../shared/services/notification-service';
+import DateTimeHelper from '../../../../shared/helpers/DateTimeHelper';
 
 // sx styles
 const avatarSX = {
@@ -190,7 +191,7 @@ const Notification = () => {
                             />
                             <ListItemSecondaryAction>
                               <Typography variant="caption" noWrap>
-                                21:45
+                                {DateTimeHelper.calculateTimeAgo(notification?.createdAt)}
                               </Typography>
                             </ListItemSecondaryAction>
                           </ListItemButton>
