@@ -9,7 +9,6 @@ export default asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'Notifications not found' });
     }
 
-    // Update all found notifications to set is_read to 1
     notifications.forEach((notification) => {
       notification.is_read = 1;
       notification.save();
