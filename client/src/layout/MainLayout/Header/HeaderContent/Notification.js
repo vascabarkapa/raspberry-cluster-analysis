@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -27,6 +27,9 @@ import Transitions from 'components/@extended/Transitions';
 // assets
 import { BellOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons';
 
+// services
+import NotificationService from '../../../../shared/services/notification-service';
+
 // sx styles
 const avatarSX = {
   width: 36,
@@ -52,6 +55,18 @@ const Notification = () => {
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [numberOfUnreadNotifications, setNumberOfUnreadNotifications] = useState(0);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    NotificationService.getNotifications().then((response) => {
+      if (response) {
+        setNotifications(response?.data);
+        setNumberOfUnreadNotifications(response?.data.length);
+      }
+    });
+  }, []);
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -78,7 +93,7 @@ const Notification = () => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Badge badgeContent={1} color="primary">
+        <Badge badgeContent={numberOfUnreadNotifications} color="primary">
           <BellOutlined />
         </Badge>
       </IconButton>
@@ -136,35 +151,40 @@ const Notification = () => {
                       }
                     }}
                   >
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'error.main',
-                            bgcolor: 'error.lighter'
-                          }}
-                        >
-                          <SettingOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6" sx={{ mr: 5 }}>
-                            Your cluster is&nbsp;
-                            <Typography component="span" variant="subtitle1">
-                              overloaded!
-                            </Typography>{' '}
-                          </Typography>
-                        }
-                        secondary="Check the health of the cluster."
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          21:45
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
+                    {notifications.map((notification) => (
+                        <>
+                          <ListItemButton sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}>
+                            <ListItemAvatar>
+                              <Avatar
+                                sx={{
+                                  color: 'error.main',
+                                  bgcolor: 'error.lighter'
+                                }}
+                              >
+                                <SettingOutlined />
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={
+                                <Typography variant="h6" sx={{ mr: 5 }}>
+                                  Your cluster is&nbsp;
+                                  <Typography component="span" variant="subtitle1">
+                                    overloaded!
+                                  </Typography>{' '}
+                                </Typography>
+                              }
+                              secondary={notification?.description}
+                            />
+                            <ListItemSecondaryAction>
+                              <Typography variant="caption" noWrap>
+                                21:45
+                              </Typography>
+                            </ListItemSecondaryAction>
+                          </ListItemButton>
+                          <Divider />
+                        </>
+                      )
+                    )}
                     <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
                       <ListItemText
                         primary={
