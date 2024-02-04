@@ -61,8 +61,11 @@ const Notification = () => {
   useEffect(() => {
     NotificationService.getNotifications().then((response) => {
       if (response) {
-        setNotifications(response?.data);
-        setNumberOfUnreadNotifications(response?.data.length);
+        const notifications = response?.data;
+        const unreadNotifications = notifications.filter(notification => !notification.is_read);
+
+        setNotifications(notifications);
+        setNumberOfUnreadNotifications(unreadNotifications.length);
       }
     });
   }, []);
@@ -189,7 +192,7 @@ const Notification = () => {
                       <ListItemText
                         primary={
                           <Typography variant="h6" color="primary">
-                            View All
+                            Read All
                           </Typography>
                         }
                       />
