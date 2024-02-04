@@ -11,9 +11,14 @@ function readNotification(id) {
   return post(ENDPOINT + '/' + id);
 }
 
+function readAllNotifications() {
+  return post(ENDPOINT + '/read-all/' + CURRENT_USER?.id);
+}
+
 const NotificationService = {
   getNotifications,
-  readNotification
+  readNotification,
+  readAllNotifications
 };
 
 export default NotificationService;
