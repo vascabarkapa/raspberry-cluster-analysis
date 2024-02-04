@@ -9,32 +9,49 @@ import AverageImageBarChart from './AverageImageBarChart';
 import LoadThresholdChart from './LoadThresholdChart';
 import MainCard from 'components/MainCard';
 import ImageFacesChart from './ImageFacesChart';
+import Dots from '../../components/loading/Dots';
 
 // toast
 import { toast } from 'react-toastify';
+
+// services
+import ImageService from '../../shared/services/image-service';
+import ClusterService from '../../shared/services/cluster-service';
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
   const [initialRender, setInitialRender] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [numberOfFaces, setNumberOfFaces] = useState({});
+  const [loadThreshold, setLoadThreshold] = useState({});
 
   useEffect(() => {
-    const delay = 200; // 2 seconds
-    const timeoutId = setTimeout(() => {
-      updatePageTitle('Cloudberry');
+    setIsLoading(true);
+    updatePageTitle('Cloudberry');
 
-      if (!initialRender) {
-        toast.info('Loaded latest data');
-      }
+    if (!initialRender) {
+      ImageService.getNumberOfFaces().then((numberOfFacesResponse) => {
+        if (numberOfFacesResponse) {
+          setNumberOfFaces(numberOfFacesResponse?.data);
 
-      setInitialRender(false);
-    }, delay);
+          ClusterService.getLoadThreshold().then((loadThresholdResponse) => {
+            console.log(loadThresholdResponse)
+            if (loadThresholdResponse) {
+              setLoadThreshold(loadThresholdResponse?.data);
+              setIsLoading(false);
+              toast.info('Loaded latest data');
+            }
+          });
+        }
+      });
+    }
 
-    return () => clearTimeout(timeoutId);
+    setInitialRender(false);
   }, [initialRender]);
 
   return (
-    !initialRender && (
+    !initialRender && !isLoading ? (
       <Grid item xs={12} sx={{ mx: { xs: 1, md: 5 }, my: { xs: 1, md: 2 } }}>
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
           {/* row 1 */}
@@ -46,7 +63,7 @@ const DashboardDefault = () => {
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
-                <LoadThresholdChart />
+                <LoadThresholdChart loadThreshold={loadThreshold} />
               </Box>
             </MainCard>
           </Grid>
@@ -55,12 +72,12 @@ const DashboardDefault = () => {
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">The Number of Faces recognized in the last 24 hours</Typography>
+                <Typography variant="h5">The Number of Faces recognized in the last hour</Typography>
               </Grid>
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
-                <ImageFacesChart />
+                <ImageFacesChart numberOfFaces={numberOfFaces} />
               </Box>
             </MainCard>
           </Grid>
@@ -85,6 +102,8 @@ const DashboardDefault = () => {
           </Grid>
         </Grid>
       </Grid>
+    ) : (
+      <Dots />
     )
   );
 };
