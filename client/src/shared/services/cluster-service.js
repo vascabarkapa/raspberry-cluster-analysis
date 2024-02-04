@@ -10,9 +10,14 @@ function createClusters(user) {
   return post(ENDPOINT, user);
 }
 
+function getLoadThreshold() {
+  return get(ENDPOINT + '/load-threshold');
+}
+
 const ClusterService = {
   getClusters,
-  createClusters
+  createClusters,
+  getLoadThreshold
 };
 
 export default ClusterService;
