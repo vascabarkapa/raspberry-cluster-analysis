@@ -174,7 +174,7 @@ export default function ImageTable() {
                   );
                 })
               ) : (
-                <TableEmpty colSpan={8} text={'No Image information'} />
+                <TableEmpty colSpan={6} text={'No Image information'} />
               )}
             </TableBody>
           )}

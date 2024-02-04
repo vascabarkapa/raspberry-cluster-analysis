@@ -227,7 +227,7 @@ export default function ClusterTable() {
           )}
           {totalClusters && totalClusters > 0 && (
             <TablePagination
-              colSpan={6}
+              colSpan={8}
               totalItems={totalClusters}
               pageSize={pageSize}
               totalPages={totalPages}
