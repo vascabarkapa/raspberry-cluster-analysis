@@ -206,7 +206,11 @@ const Notification = () => {
                           <>
                             <ListItemButton
                               sx={!notification?.is_read && { bgcolor: 'primary.lighter' }}
-                              onClick={() => handleReadNotification(notification?._id)}
+                              onClick={() => {
+                                if (!notification?.is_read) {
+                                  handleReadNotification(notification?._id);
+                                }
+                              }}
                             >
                               <ListItemAvatar>
                                 <Avatar
@@ -246,7 +250,14 @@ const Notification = () => {
                     )}
                   </List>
                   {notifications && notifications.length > 0 ? (
-                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }} onClick={() => handleReadAllNotification()}>
+                    <ListItemButton
+                      sx={{ textAlign: 'center', py: `${12}px !important` }}
+                      onClick={() => {
+                        if (notifications.some((notification) => !notification.is_read)) {
+                          handleReadAllNotification();
+                        }
+                      }}
+                    >
                       <ListItemText
                         primary={
                           <Typography variant="h6" color="primary">
