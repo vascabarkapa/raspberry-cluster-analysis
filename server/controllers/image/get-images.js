@@ -4,7 +4,7 @@ import { Image } from './../../models/index.js';
 export default asyncHandler(async (req, res) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const perPage = parseInt(req.query.pageSize) || 10;
+    const perPage = parseInt(req.query.pageSize) || 30;
 
     const skip = (page - 1) * perPage;
 
