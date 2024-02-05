@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-const { PORT, ENVIRONMENT, CONNECTION_STRING, ACCESS_TOKEN_SECRET, API_URL, FRONT_URL } = process.env
+const { PORT, ENVIRONMENT, CONNECTION_STRING, ACCESS_TOKEN_SECRET, API_URL, FRONT_URL, NODEMAILER_USER, NODEMAILER_PASS } = process.env
 
 export const port = PORT || 5000;
 export const environment = ENVIRONMENT;
@@ -11,3 +11,5 @@ export const apiUrl = API_URL;
 export const frontUrl = FRONT_URL;
 export const prefix = '/api';
 export const specs = "/docs";
+export const nodemailerUser = NODEMAILER_USER;
+export const nodemailerPassword = NODEMAILER_PASS
