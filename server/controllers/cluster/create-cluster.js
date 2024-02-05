@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { Cluster, Notification, User } from './../../models/index.js';
+import sendEmail from '../../shared/email-helper.js';
 
 export default asyncHandler(async (req, res) => {
   try {
@@ -17,8 +18,11 @@ export default asyncHandler(async (req, res) => {
           description: 'Check the health of the cluster.',
           is_read: false
         });
+
+        sendEmail(newCluster, adminUser, 'CLOUDBERRY - Cluster Overload', 'vascabarkapa@gmail.com');
       });
     }
+
 
     res.status(201).json(newCluster);
   } catch (error) {
