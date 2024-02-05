@@ -38,6 +38,8 @@ To run the Cloudberry project locally, follow these steps:
    ACCESS_TOKEN_SECRET="Secret key used for signing and verifying JWT (JSON Web Token) tokens"
    API_URL="Specifies the URL of your API service, e.g. http://localhost:5001/api"
    FRONT_URL="URL for the frontend application, e.g. http://localhost:3000"
+   NODEMAILER_USER="Username or email for authentication when sending emails using the nodemailer"
+   NODEMAILER_PASS="Password used for authentication when sending emails using the nodemailer"
    ```
    ```bash
    client/.env
