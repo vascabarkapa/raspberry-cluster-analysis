@@ -5,7 +5,7 @@ export default asyncHandler(async (req, res) => {
   try {
     const newCluster = await Cluster.create(req.body);
 
-    if (newCluster.replicas > newCluster.max_pods) {
+    if (newCluster.replicas === newCluster.max_pods) {
       const adminUsers = await User.find({ role: 'admin' });
 
       adminUsers.forEach(async (adminUser) => {
