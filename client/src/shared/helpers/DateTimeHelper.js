@@ -52,7 +52,7 @@ function calculateTimeAgo(createdAt) {
     return `${hours}h ago`;
   } else if (notificationTime.isSame(currentTime, 'day')) {
     return notificationTime.format('HH:mm');
-  } else if (notificationTime.isSame(currentTime, 'yesterday')) {
+  } else if (notificationTime.isSame(currentTime.clone().subtract(1, 'day'), 'day')) {
     return '1 day ago';
   } else if (notificationTime.isAfter(currentTime.clone().subtract(2, 'days').startOf('day'))) {
     return '2 days ago';
