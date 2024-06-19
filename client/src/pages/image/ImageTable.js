@@ -107,7 +107,7 @@ export default function ImageTable() {
     setInitialRender(false);
   }, [initialRender]);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (event, value) => {
     if (currentPage !== value) {
       setIsLoading(true);
 
@@ -178,7 +178,7 @@ export default function ImageTable() {
               )}
             </TableBody>
           )}
-          {totalImages && totalImages > 0 && (
+          {(totalImages && totalImages) > 0 ? (
             <TablePagination
               colSpan={6}
               totalItems={totalImages}
@@ -187,6 +187,8 @@ export default function ImageTable() {
               currentPage={currentPage}
               handlePageChange={handlePageChange}
             />
+          ) : (
+            <></>
           )}
         </Table>
       </TableContainer>

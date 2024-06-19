@@ -151,7 +151,7 @@ export default function ClusterTable() {
     setInitialRender(false);
   }, [initialRender]);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (event, value) => {
     if (currentPage !== value) {
       setIsLoading(true);
 
@@ -225,7 +225,7 @@ export default function ClusterTable() {
               )}
             </TableBody>
           )}
-          {totalClusters && totalClusters > 0 && (
+          {(totalClusters && totalClusters) > 0 ? (
             <TablePagination
               colSpan={8}
               totalItems={totalClusters}
@@ -234,6 +234,8 @@ export default function ClusterTable() {
               currentPage={currentPage}
               handlePageChange={handlePageChange}
             />
+          ) : (
+            <></>
           )}
         </Table>
       </TableContainer>
