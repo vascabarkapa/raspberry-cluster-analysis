@@ -98,7 +98,7 @@ const ClusterStatus = ({ load, loadThreshold }) => {
   } else if (load >= 70 && load <= 100) {
     color = 'error';
   } else {
-    color = 'primary';
+    color = 'error';
   }
 
   return (

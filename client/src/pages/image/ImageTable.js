@@ -166,7 +166,7 @@ export default function ImageTable() {
                         {image?._id}
                       </TableCell>
                       <TableCell align="left">{image?.node}</TableCell>
-                      <TableCell align="left">{image?.image}.jpg</TableCell>
+                      <TableCell align="left">{image?.image}</TableCell>
                       <TableCell align="left">{image?.number_of_faces}</TableCell>
                       <TableCell align="left">{image?.processing_time}ms</TableCell>
                       <TableCell align="left">{DateTimeHelper.convertToLocalFormatWithSeconds(image?.taken_at)}</TableCell>
